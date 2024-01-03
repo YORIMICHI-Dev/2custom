@@ -1,5 +1,10 @@
+<script setup lang="ts"></script>
+
 <template>
   <div>
-    <NuxtWelcome />
+    <NuxtLoadingIndicator />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>

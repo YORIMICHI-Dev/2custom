@@ -9,7 +9,7 @@ export const useSettingStore = defineStore({
 
   getters: {},
   actions: {
-    SET_THEME(payload: any) {
+    SET_THEME(payload: string) {
       this.actTheme = payload;
     },
   },

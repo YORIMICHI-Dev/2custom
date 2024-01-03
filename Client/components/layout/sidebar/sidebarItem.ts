@@ -1,45 +1,35 @@
 import {
-    CodeIcon,
-    BrandGithubIcon,
-    UserCircleIcon,
-    HistoryIcon,
-    HeartIcon,
+    ListDetailsIcon,
+    Home2Icon,
+    SettingsIcon,
+    MailCheckIcon
   } from 'vue-tabler-icons';
 import type { SidebarMenu } from '~/types/sidebar';
 
 
   const sidebarItem: SidebarMenu[] = [
-    { header: 'Dashboard' },
+    { header: '設定' },
     {
-      title: 'Profile',
-      icon: UserCircleIcon,
+      title: 'ホーム',
+      icon: Home2Icon,
       chipColor: 'surface',
       chipBgColor: 'secondary',
-      to: '/dashboard/profile',
+      to: '/',
     },
     {
-      title: 'Skill',
-      icon: CodeIcon,
-      to: '/dashboard/skill',
+      title: 'カスタム',
+      icon: ListDetailsIcon,
+      to: '/custom',
     },
     {
-      title: 'History',
-      icon: HistoryIcon,
-      to: '/dashboard/history',
+      title: 'ユーザー設定',
+      icon: SettingsIcon,
+      to: '/setting',
     },
     {
-      title: 'Hobby',
-      icon: HeartIcon,
-      to: '/dashboard/hobby',
-    },
-    { header: 'Apps' },
-    {
-      title: 'Repository',
-      icon: BrandGithubIcon,
-      to: '/apps/github',
-      chip: 'New',
-      chipColor: 'surface',
-      chipBgColor: 'secondary',
+      title: 'フォーム',
+      icon: MailCheckIcon,
+      to: '/form',
     },
 ]
 export default sidebarItem;
