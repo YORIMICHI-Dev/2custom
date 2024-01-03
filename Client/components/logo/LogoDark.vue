@@ -5,9 +5,9 @@
     <NuxtLink to="/" class="d-flex gap-2">
       <img
         width="32"
-        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg"
+        src="/favicon.ico"
       />
-      <h3 class="h3">Dashboard</h3>
+      <h3 class="h4">まとめカスタマイズ</h3>
     </NuxtLink>
   </div>
 </template>
