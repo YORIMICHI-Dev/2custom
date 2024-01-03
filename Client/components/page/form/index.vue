@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import {
+  BulbIcon
+} from 'vue-tabler-icons';
 const submitState = ref(false);
 const clickSubmit = () => {
   submitState.value = !submitState.value;
@@ -11,12 +14,15 @@ const formContents = [
   '追加したい機能について',
   '追加したいまとめサイトについて',
 ];
+
+const icon = BulbIcon
 </script>
 
 <template>
-  <SharedUIParentCard title="UI・機能などのアイディアを募集中">
+  <SharedUIParentCard :icon=icon title="UI・機能などのアイディア募集中">
     <div class="px-10">
       <VCol cols="12">
+        <!-- User ID -->
         <VLabel class="mb-2 font-weight-medium">ユーザーID</VLabel>
         <VTextField
           variant="outlined"
@@ -32,6 +38,8 @@ const formContents = [
             />
           </template>
         </VTextField>
+
+        <!-- Email -->
         <VLabel class="mb-2 font-weight-medium">メールアドレス</VLabel>
         <VTextField
           variant="outlined"
@@ -47,6 +55,8 @@ const formContents = [
             />
           </template>
         </VTextField>
+
+        <!-- Content -->
         <VLabel class="mb-2 font-weight-medium">お問い合わせ項目</VLabel>
         <v-select :items="formContents" label="Content">
           <template v-slot:prepend-inner>
@@ -58,6 +68,7 @@ const formContents = [
           </template>
         </v-select>
 
+        <!-- Detail -->
         <VLabel class="mb-2 font-weight-medium">お問い合わせ詳細</VLabel>
         <VTextarea
           variant="outlined"
@@ -67,6 +78,7 @@ const formContents = [
         >
         </VTextarea>
 
+        <!-- Submit -->
         <div class="d-flex justify-end">
           <VBtn color="primary" @click="clickSubmit" class="" flat>送信</VBtn>
         </div>

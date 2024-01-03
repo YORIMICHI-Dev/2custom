@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import type breadcrumbType from "@/types/breadcrumb"
 const props = defineProps<{
   title: string;
-  breadcrumbs: breadcrumb[];
+  breadcrumbs: any[];
 }>();
 const { title, breadcrumbs } = props;
 </script>
