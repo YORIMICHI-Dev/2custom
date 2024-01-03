@@ -1,0 +1,45 @@
+@use 'variables';
+
+html {
+    .bg-success {
+        color: variables.$white !important;
+    }
+
+    .bg-primary {
+        color: variables.$white !important;
+    }
+
+    .bg-secondary {
+        color: variables.$white !important;
+    }
+
+    .bg-warning {
+        color: variables.$white !important;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.border,
+.v-divider {
+    border-color: rgba(var(--v-border-color), 1) !important;
+    opacity: 1;
+}
+.avtar-border {
+    border: 2px solid rgb(var(--v-theme-surface)) !important;
+}
+//*Calender font-color*//
+.vc-container,.vc-pane-container{
+    font-family: inherit !important;
+    border-color: rgba(var(--v-border-color), 1) !important;
+}
+.vc-title{
+    color: inherit !important;
+}
+.vc-select select,.vc-am-pm{
+    color: inherit !important;
+    background-color: inherit !important;
+}
