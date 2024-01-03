@@ -5,6 +5,12 @@
 // Vuetify main sass
 @use 'vuetify/styles/main.sass';
 
-// pages
-@use './pages/dashboards';
+// layout
+@use './layout/container';
+@use './layout/dark';
+@use './layout/reboot';
+@use './layout/sidebar';
+@use './layout/text';
+@use './layout/topbar';
+
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap");
