@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import {
-  BulbIcon
-} from 'vue-tabler-icons';
+import { BulbIcon } from 'vue-tabler-icons';
 const submitState = ref(false);
 const clickSubmit = () => {
   submitState.value = !submitState.value;
@@ -15,11 +13,11 @@ const formContents = [
   '追加したいまとめサイトについて',
 ];
 
-const icon = BulbIcon
+const icon = BulbIcon;
 </script>
 
 <template>
-  <SharedUIParentCard :icon=icon title="UI・機能などのアイディア募集中">
+  <SharedUIParentCard :icon="icon" title="UI・機能などのアイディア募集中">
     <div class="px-10">
       <VCol cols="12">
         <!-- User ID -->

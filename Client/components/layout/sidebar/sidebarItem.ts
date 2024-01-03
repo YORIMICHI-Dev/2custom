@@ -4,10 +4,10 @@ import {
   SettingsIcon,
   MailCheckIcon,
 } from 'vue-tabler-icons';
-import type { SidebarMenu } from '~/types/sidebar';
+import type { SidebarMenu } from '@/types/layout/sidebar';
 
 const sidebarItem: SidebarMenu[] = [
-  { header: '設定' },
+  { header: 'View' },
   {
     title: 'ホーム',
     icon: Home2Icon,

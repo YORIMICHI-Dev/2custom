@@ -31,12 +31,12 @@ const sidebar = useSidebarStore();
     <!-- Setting -->
     <NuxtLink href="/custom" class="">
       <VBtn
-      class="custom-hover-primary"
-      icon
-      color="primary"
-      variant="text"
-      @click.stop="sidebar.SET_MINI_SIDEBAR(!sidebar.miniSidebar)"
-    >
+        class="custom-hover-primary"
+        icon
+        color="primary"
+        variant="text"
+        @click.stop="sidebar.SET_MINI_SIDEBAR(!sidebar.miniSidebar)"
+      >
         <ListDetailsIcon size="20" stroke-width="1.5" />
       </VBtn>
     </NuxtLink>
