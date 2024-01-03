@@ -7,7 +7,7 @@ useHead({
   meta: [{ content: TITLE }],
   titleTemplate: (titleChunk: string | undefined) => {
     let title = TITLE;
-    if (titleChunk !== undefined) return `${titleChunk} | Dashboard`;
+    if (titleChunk !== undefined) return `${titleChunk} | まとめカスタマイズ`;
     return title;
   },
 });
