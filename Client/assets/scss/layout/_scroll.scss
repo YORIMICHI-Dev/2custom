@@ -1,0 +1,11 @@
+.customizer-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    border-radius: 50%;
+    .icon {
+        animation: progress-circular-rotate 1.4s linear infinite;
+        transform-origin: center center;
+        transition: all 0.2s ease-in-out;
+    }
+}
