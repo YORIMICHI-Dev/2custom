@@ -25,5 +25,5 @@ const breadcrumbs = ref([
 <template>
   <!-- Breadcrumb -->
   <SharedBaseBreadCrumb :title="TITLE" :breadcrumbs="breadcrumbs" />
-
+  <PageForm />
 </template>
