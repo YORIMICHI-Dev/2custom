@@ -1,8 +1,8 @@
 export type SidebarProps = {
-    sidebarDrawer: boolean | null;
-    customizerDrawer: boolean;
-    miniSidebar: boolean;
-  };
+  sidebarDrawer: boolean | null;
+  customizerDrawer: boolean;
+  miniSidebar: boolean;
+};
 
 export type SidebarMenu = {
   header?: string;
@@ -18,4 +18,4 @@ export type SidebarMenu = {
   disabled?: boolean;
   type?: string;
   subCaption?: string;
-}
+};

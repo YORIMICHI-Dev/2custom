@@ -16,10 +16,7 @@ useHead({
 <template>
   <VApp
     :theme="setting.actTheme"
-    :class="[
-      setting.actTheme,
-      sidebar.miniSidebar ? 'mini-sidebar' : '',
-    ]"
+    :class="[setting.actTheme, sidebar.miniSidebar ? 'mini-sidebar' : '']"
   >
     <!-- Sidebar -->
     <LayoutSidebar />
