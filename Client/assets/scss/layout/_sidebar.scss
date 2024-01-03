@@ -140,13 +140,13 @@
         .leftSidebar:hover {
             box-shadow: variables.$box-shadow !important;
 
-            .mini-icon {
-                display: none;
-            }
+            // .mini-icon {
+            //     display: none;
+            // }
 
-            .mini-text {
-                display: block;
-            }
+            // .mini-text {
+            //     display: block;
+            // }
         }
 
         .v-navigation-drawer--expand-on-hover:hover {

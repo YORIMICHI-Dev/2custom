@@ -13,7 +13,6 @@ const sidebar = useSidebarStore();
     rail-width="75"
     class="leftSidebar"
     :rail="sidebar.miniSidebar"
-    expand-on-hover
     app
   >
     <!-- Logo -->

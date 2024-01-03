@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const setting = useSettingStore();
 const sidebar = useSidebarStore();
-const TITLE = '2ch Customizer';
+const TITLE = 'まとめカスタマイズ';
 
 useHead({
   meta: [{ content: TITLE }],
@@ -21,22 +21,10 @@ useHead({
       sidebar.miniSidebar ? 'mini-sidebar' : '',
     ]"
   >
-    <!-- Customizer Drawer -->
-    <VNavigationDrawer
-      app
-      temporary
-      elevation="10"
-      location="right"
-      v-model="sidebar.customizerDrawer"
-      width="320"
-    >
-      <LayoutCustom />
-    </VNavigationDrawer>
-    <!-- Customizer Drawer -->
-
     <!-- Sidebar -->
     <LayoutSidebar />
-    <!-- Sidebar -->
+
+    <LayoutHeader />
 
     <!-- Main Contents -->
     <VMain>
@@ -46,12 +34,10 @@ useHead({
           <slot />
           <!-- Main View -->
 
-          <!-- Customizer button -->
-          <LayoutUpButton/>
+          <!-- Scroll button -->
+          <LayoutScrollButton />
         </div>
-        <!-- Customizer button -->
       </VContainer>
     </VMain>
-    <!-- Main Contents -->
   </VApp>
 </template>

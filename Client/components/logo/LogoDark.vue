@@ -1,13 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const sidebar = useSidebarStore()
+</script>
 
 <template>
   <div class="logo">
-    <NuxtLink to="/" class="d-flex gap-2">
+    <NuxtLink to="/" class="d-flex gap-2 text-inherits">
       <img
-        width="32"
-        src="/favicon.ico"
+        width="24"
+        src="/images/logo/icon.svg"
       />
-      <h3 class="h4">まとめカスタマイズ</h3>
+      <img
+        v-if="!sidebar.miniSidebar"
+        width="180"
+        src="/images/logo/title_b.svg"
+      />
     </NuxtLink>
   </div>
 </template>
