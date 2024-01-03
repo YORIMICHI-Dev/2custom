@@ -5,6 +5,12 @@
 // Vuetify main sass
 @use 'vuetify/styles/main.sass';
 
+// components
+@use './components/VButton';
+@use './components/VCard';
+@use './components/VList';
+@use './components/VShadow';
+
 // layout
 @use './layout/container';
 @use './layout/dark';
