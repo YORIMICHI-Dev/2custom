@@ -4,7 +4,7 @@ import type { SidebarProps } from '@/types/sidebar';
 export const useSidebarStore = defineStore({
   id: 'sidebar',
   state: (): SidebarProps => ({
-    sidebarDrawer: true,
+    sidebarDrawer: null,
     customizerDrawer: false,
     miniSidebar: false,
   }),

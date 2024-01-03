@@ -1,5 +1,5 @@
 export type SidebarProps = {
-    sidebarDrawer: boolean;
+    sidebarDrawer: boolean | null;
     customizerDrawer: boolean;
     miniSidebar: boolean;
   };
