@@ -20,11 +20,11 @@ watchEffect(() => {
 
 <template>
   <VCol cols="12" md="9">
-    <v-card elevation="10">
-      <v-card-item>
-        <v-card-title class="text-h4">レイアウト</v-card-title>
+    <VCard elevation="10">
+      <VCardItem>
+        <VCardTitle class="text-h4">レイアウト</VCardTitle>
+        <!-- サイトレイアウト -->
         <div>
-          <!-- サイトレイアウト -->
           <div class="d-flex align-center mt-7">
             <VAvatar size="48" class="mr-2" rounded="md" color="lightprimary">
               <LayoutIcon size="22" />
@@ -43,16 +43,13 @@ watchEffect(() => {
                 class="d-flex"
               >
                 <v-radio label="まとめ" color="primary" value="list" />
-                <v-radio
-                  label="アンテナ"
-                  color="primary"
-                  value="gather"
-                />
+                <v-radio label="アンテナ" color="primary" value="gather" />
               </v-radio-group>
             </div>
           </div>
         </div>
         <VDivider class="my-6" />
+
         <!-- サイト数 -->
         <div>
           <div class="d-flex align-center mt-7">
@@ -132,7 +129,7 @@ watchEffect(() => {
             </div>
           </div>
         </div>
-      </v-card-item>
-    </v-card>
-</VCol>
+      </VCardItem>
+    </VCard>
+  </VCol>
 </template>

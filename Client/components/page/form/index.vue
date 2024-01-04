@@ -15,9 +15,6 @@ const formContents = [
   '追加したい機能について',
   '追加したいまとめサイトについて',
 ];
-
-import { BulbIcon } from 'vue-tabler-icons';
-const icon = BulbIcon;
 </script>
 
 <template>

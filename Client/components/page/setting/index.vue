@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const router = useRouter();
-const setting = useSettingStore();
 
 const clickSaveSetting = () => {
   // put setting

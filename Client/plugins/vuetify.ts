@@ -8,6 +8,7 @@ import * as directives from 'vuetify/directives';
 
 // Loading scss
 import '@/assets/scss/main.scss';
+import { VueDraggableNext } from 'vue-draggable-next';
 
 // Custom theme
 import {
@@ -31,6 +32,7 @@ export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
     ssr: true,
     components: {
+      draggable: VueDraggableNext,
       ...components,
     },
     directives,
