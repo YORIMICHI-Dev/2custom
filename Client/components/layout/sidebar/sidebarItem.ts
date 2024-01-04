@@ -7,7 +7,7 @@ import {
 import type { SidebarMenu } from '@/types/layout/sidebar';
 
 const sidebarItem: SidebarMenu[] = [
-  { header: 'View' },
+  { header: 'MENU' },
   {
     title: 'ホーム',
     icon: Home2Icon,

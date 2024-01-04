@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { BulbIcon } from 'vue-tabler-icons';
+const router = useRouter();
 const submitState = ref(false);
 const clickSubmit = () => {
   submitState.value = !submitState.value;
+};
+const clickCancelSetting = () => {
+  router.push('/');
 };
 
 // Form Contents
@@ -13,6 +16,7 @@ const formContents = [
   '追加したいまとめサイトについて',
 ];
 
+import { BulbIcon } from 'vue-tabler-icons';
 const icon = BulbIcon;
 </script>
 
@@ -84,16 +88,29 @@ const icon = BulbIcon;
             color="primary"
           >
           </VTextarea>
-
-          <!-- Submit -->
-          <div class="d-flex justify-end">
-            <VBtn color="primary" @click="clickSubmit" class="" flat>送信</VBtn>
-          </div>
-
-          <!-- Feature -->
-          <div v-if="submitState">hello</div>
         </VCardItem>
       </VCard>
+    </VCol>
+
+    <!-- Submit -->
+    <VCol cols="12" md="9">
+      <div class="d-flex justify-end mt-5">
+        <VBtn
+          size="large"
+          color="primary"
+          class="mr-4"
+          flat
+          @click="clickSubmit"
+          >Send</VBtn
+        >
+        <VBtn
+          size="large"
+          class="bg-lighterror text-error"
+          flat
+          @click="clickCancelSetting"
+          >Cancel</VBtn
+        >
+      </div>
     </VCol>
   </VRow>
 </template>

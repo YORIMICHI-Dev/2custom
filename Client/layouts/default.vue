@@ -29,7 +29,6 @@ useHead({
         <div class="maxWidth">
           <!-- Main View -->
           <slot />
-          <!-- Main View -->
 
           <!-- Scroll button -->
           <LayoutScrollButton />
