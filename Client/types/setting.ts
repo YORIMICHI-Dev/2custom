@@ -1,5 +1,8 @@
 export type SettingProps = {
   actTheme: string;
   format: 'list' | 'gather';
-  num_row: 1 | 2;
+  articleLines: number;
+  siteNum: number;
+  role: 'visitor' | 'general' | 'special' | 'admin';
+  scrollButton: boolean;
 };
