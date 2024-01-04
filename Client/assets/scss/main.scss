@@ -10,13 +10,15 @@
 @use './components/VCard';
 @use './components/VList';
 @use './components/VShadow';
+@use './components/VSwitch';
+@use './components/VTooltip';
 
 // layout
 @use './layout/container';
 @use './layout/dark';
 @use './layout/reboot';
-
 @use './layout/scroll';
+@use './layout/setting';
 @use './layout/sidebar';
 @use './layout/text';
 @use './layout/topbar';

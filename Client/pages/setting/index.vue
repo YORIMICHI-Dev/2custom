@@ -3,7 +3,7 @@
 //   middleware: ['home'],
 // });
 
-const TITLE = '設定';
+const TITLE = 'ユーザー設定';
 useHead({
   title: TITLE,
 });
@@ -26,4 +26,5 @@ const breadcrumbs = ref([
   <!-- Breadcrumb -->
   <SharedBaseBreadCrumb :title="TITLE" :breadcrumbs="breadcrumbs" />
 
+  <PageSetting />
 </template>

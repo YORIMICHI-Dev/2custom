@@ -3,6 +3,5 @@ export type SettingProps = {
   format: 'list' | 'gather';
   articleLines: number;
   siteNum: number;
-  role: 'visitor' | 'general' | 'special' | 'admin';
   scrollButton: boolean;
 };
