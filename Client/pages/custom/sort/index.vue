@@ -3,7 +3,7 @@
 //   middleware: ['home'],
 // });
 
-const TITLE = 'カスタム';
+const TITLE = '並べ替え';
 useHead({
   title: TITLE,
 });
@@ -13,6 +13,11 @@ const breadcrumbs = ref([
     text: 'ホーム',
     disabled: false,
     href: '/',
+  },
+  {
+    text: 'カスタム',
+    disabled: true,
+    href: '/custom',
   },
   {
     text: TITLE,
@@ -26,5 +31,5 @@ const breadcrumbs = ref([
   <!-- Breadcrumb -->
   <SharedBaseBreadCrumb :title="TITLE" :breadcrumbs="breadcrumbs" />
 
+  <PageCustomSort />
 </template>
-
