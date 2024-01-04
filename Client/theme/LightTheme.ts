@@ -1,4 +1,4 @@
-import type { ThemeTypes } from '@/types/themeType';
+import type { ThemeTypes } from '~/types/theme/themeType';
 
 const BLUE_THEME: ThemeTypes = {
   name: 'BLUE_THEME',
