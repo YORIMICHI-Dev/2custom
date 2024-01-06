@@ -1,4 +1,7 @@
 .v-app-bar {
+    box-shadow: none !important;
+    border-bottom: 1px solid rgb(var(--v-theme-borderColor));
+
     .v-toolbar__content {
         padding: 0 24px;
         > .v-btn:first-child {
