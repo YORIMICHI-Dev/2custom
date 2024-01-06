@@ -15,12 +15,6 @@ const sidebar = useSidebarStore();
     :rail="sidebar.miniSidebar"
     app
   >
-    <!-- Logo -->
-    <div class="pa-5">
-      <Logo />
-    </div>
-    <!-- Logo  -->
-
     <!-- ---------------------------------------------- -->
     <!---Navigation -->
     <!-- ---------------------------------------------- -->

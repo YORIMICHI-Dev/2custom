@@ -2,7 +2,7 @@ import {
   ListDetailsIcon,
   Home2Icon,
   SettingsIcon,
-  MailCheckIcon,
+  MailIcon,
   SelectIcon,
 } from 'vue-tabler-icons';
 import type { SidebarMenu } from '@/types/layout/sidebar';
@@ -17,7 +17,7 @@ const sidebarItem: SidebarMenu[] = [
     to: '/',
   },
   {
-    title: '並べ替え',
+    title: '登録サイト',
     icon: ListDetailsIcon,
     to: '/custom/sort',
   },
@@ -33,7 +33,7 @@ const sidebarItem: SidebarMenu[] = [
   },
   {
     title: 'フォーム',
-    icon: MailCheckIcon,
+    icon: MailIcon,
     to: '/form',
   },
 ];

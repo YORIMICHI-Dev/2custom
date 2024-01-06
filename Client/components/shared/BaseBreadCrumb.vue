@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   title: string;
-  breadcrumbs: any[];
+  breadcrumbs?: any[];
 }>();
 const { title, breadcrumbs } = props;
 </script>

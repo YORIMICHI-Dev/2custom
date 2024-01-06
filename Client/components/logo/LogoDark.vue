@@ -1,16 +1,10 @@
-<script setup lang="ts">
-const sidebar = useSidebarStore();
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="logo">
+  <div class="">
     <NuxtLink to="/" class="d-flex gap-2 text-inherits">
       <img width="24" src="/images/logo/icon.svg" />
-      <img
-        v-if="!sidebar.miniSidebar"
-        width="180"
-        src="/images/logo/title_b.svg"
-      />
+      <img width="180" src="/images/logo/title_b.svg" />
     </NuxtLink>
   </div>
 </template>

@@ -5,6 +5,6 @@ export const profileItems: profileType[] = [
     avatar: proUser1,
     title: 'My Profile',
     subtitle: 'About me',
-    href: '/dashboard/profile',
+    href: '/',
   },
 ];

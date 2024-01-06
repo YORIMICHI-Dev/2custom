@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ListDetailsIcon } from 'vue-tabler-icons';
+import { ListDetailsIcon, SelectIcon } from 'vue-tabler-icons';
 
 const sidebar = useSidebarStore();
 </script>
@@ -17,6 +17,14 @@ const sidebar = useSidebarStore();
       <Menu2Icon size="20" stroke-width="1.5" />
     </VBtn>
 
+    <!-- Logo -->
+    <div class="ml-5">
+      <Logo />
+    </div>
+    <!-- Logo  -->
+
+    <VSpacer />
+
     <!-- Sidebar open/close less than lg -->
     <VBtn
       class="hidden-lg-and-up ms-3"
@@ -28,14 +36,20 @@ const sidebar = useSidebarStore();
       <Menu2Icon size="20" stroke-width="1.5" />
     </VBtn>
 
-    <!-- Setting -->
-    <NuxtLink to="/custom" class="">
+    <!-- Setting Sort -->
+    <NuxtLink to="/custom/sort" class="">
       <VBtn icon color="primary" variant="text">
         <ListDetailsIcon size="20" stroke-width="1.5" />
       </VBtn>
     </NuxtLink>
 
-    <VSpacer />
+    <!-- Setting Select -->
+    <NuxtLink to="/custom/select" class="">
+      <VBtn icon color="primary" variant="text">
+        <SelectIcon size="20" stroke-width="1.5" />
+      </VBtn>
+    </NuxtLink>
+
     <!-- Notification -->
     <LayoutHeaderNotification />
 

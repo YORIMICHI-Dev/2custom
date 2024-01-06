@@ -18,10 +18,11 @@ useHead({
     :theme="setting.actTheme"
     :class="[setting.actTheme, sidebar.miniSidebar ? 'mini-sidebar' : '']"
   >
+    <!-- Header -->
+    <LayoutHeader />
+
     <!-- Sidebar -->
     <LayoutSidebar />
-
-    <LayoutHeader />
 
     <!-- Main Contents -->
     <VMain>
