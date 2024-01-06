@@ -8,11 +8,12 @@ const sidebar = useSidebarStore();
   <VNavigationDrawer
     left
     v-model="sidebar.sidebarDrawer"
-    width="270"
+    width="200"
     elevation="0"
     rail-width="75"
     class="leftSidebar"
     :rail="sidebar.miniSidebar"
+    floating
     app
   >
     <!-- ---------------------------------------------- -->
