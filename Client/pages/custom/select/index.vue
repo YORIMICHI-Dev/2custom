@@ -3,7 +3,7 @@
 //   middleware: ['home'],
 // });
 
-const TITLE = '登録サイト';
+const TITLE = 'サイト選択';
 useHead({
   title: TITLE,
 });
@@ -31,5 +31,5 @@ const breadcrumbs = ref([
   <!-- Breadcrumb -->
   <SharedBaseBreadCrumb :title="TITLE" :breadcrumbs="breadcrumbs" />
 
-  <PageCustomSort />
+  <PageCustomSelect />
 </template>
