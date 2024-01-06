@@ -31,6 +31,7 @@ const DARK_BLUE_THEME: ThemeTypes = {
     'on-surface-variant': '#2a3447',
     grey100: '#333F55',
     grey200: '#465670',
+    grey300: '#808080',
   },
 };
 
@@ -65,6 +66,7 @@ const DARK_AQUA_THEME: ThemeTypes = {
     'on-surface-variant': '#171c23',
     grey100: '#333F55',
     grey200: '#465670',
+    grey300: '#808080',
   },
 };
 
@@ -99,6 +101,7 @@ const DARK_PURPLE_THEME: ThemeTypes = {
     'on-surface-variant': '#171c23',
     grey100: '#333F55',
     grey200: '#465670',
+    grey300: '#808080',
   },
 };
 
@@ -133,6 +136,7 @@ const DARK_GREEN_THEME: ThemeTypes = {
     'on-surface-variant': '#171c23',
     grey100: '#333F55',
     grey200: '#465670',
+    grey300: '#808080',
   },
 };
 
@@ -167,6 +171,7 @@ const DARK_CYAN_THEME: ThemeTypes = {
     'on-surface-variant': '#171c23',
     grey100: '#333F55',
     grey200: '#465670',
+    grey300: '#808080',
   },
 };
 
@@ -201,6 +206,7 @@ const DARK_ORANGE_THEME: ThemeTypes = {
     'on-surface-variant': '#171c23',
     grey100: '#333F55',
     grey200: '#465670',
+    grey300: '#808080',
   },
 };
 
