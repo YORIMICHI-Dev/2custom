@@ -7,13 +7,7 @@ const notifications = ['test', 'test', 'test', 'test', 'test'];
   <!-- ---------------------------------------------- -->
   <v-menu :close-on-content-click="false">
     <template v-slot:activator="{ props }">
-      <v-btn
-        icon
-        variant="text"
-        color="primary"
-        class="custom-hover-primary"
-        v-bind="props"
-      >
+      <v-btn icon variant="text" color="primary" class="custom-hover-primary" v-bind="props">
         <v-badge dot color="primary">
           <BellRingingIcon stroke-width="1.5" size="22" />
         </v-badge>
@@ -28,13 +22,7 @@ const notifications = ['test', 'test', 'test', 'test', 'test'];
       </div>
       <perfect-scrollbar style="height: 300px">
         <VList class="py-0 theme-list" lines="two">
-          <VListItem
-            v-for="item in notifications"
-            :key="item"
-            :value="item"
-            color="primary"
-            class="py-4 px-8"
-          >
+          <VListItem v-for="item in notifications" :key="item" :value="item" color="primary" class="py-4 px-8">
             <VListItemTitle>{{ item }}</VListItemTitle>
             <VListItemSubtitle>{{ item }}</VListItemSubtitle>
           </VListItem>
@@ -42,9 +30,7 @@ const notifications = ['test', 'test', 'test', 'test', 'test'];
         </VList>
       </perfect-scrollbar>
       <div class="py-4 px-6 text-center">
-        <v-btn color="primary" variant="outlined" block
-          >お知らせ・更新履歴</v-btn
-        >
+        <v-btn color="primary" variant="outlined" to="/notification" block>お知らせ・更新履歴</v-btn>
       </div>
     </v-sheet>
   </v-menu>

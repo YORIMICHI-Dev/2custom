@@ -14,18 +14,12 @@ const sidebar = useSidebarStore();
       variant="text"
       @click.stop="sidebar.SET_MINI_SIDEBAR(!sidebar.miniSidebar)"
     >
-      <Menu2Icon size="20" stroke-width="1.5" />
+      <Menu2Icon size="20" stroke-width="2" />
     </VBtn>
 
     <!-- Sidebar open/close less than lg -->
-    <VBtn
-      class="hidden-lg-and-up ms-3"
-      icon
-      variant="flat"
-      @click.stop="sidebar.SET_SIDEBAR_DRAWER"
-      size="small"
-    >
-      <Menu2Icon size="20" stroke-width="1.5" />
+    <VBtn class="hidden-lg-and-up ms-3" icon variant="flat" @click.stop="sidebar.SET_SIDEBAR_DRAWER" size="small">
+      <Menu2Icon size="20" stroke-width="2" />
     </VBtn>
 
     <!-- Logo -->
