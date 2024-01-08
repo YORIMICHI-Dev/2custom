@@ -3,13 +3,12 @@
 //   middleware: ['home'],
 // });
 
-const TITLE = 'ホーム';
+const TITLE = 'まとめカスタマイズ';
 useHead({
   title: TITLE,
 });
 </script>
 
 <template>
-  <!-- Breadcrumb -->
-
+  <PageHome />
 </template>

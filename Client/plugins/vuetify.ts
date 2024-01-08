@@ -11,14 +11,7 @@ import '@/assets/scss/main.scss';
 import { VueDraggableNext } from 'vue-draggable-next';
 
 // Custom theme
-import {
-  BLUE_THEME,
-  AQUA_THEME,
-  PURPLE_THEME,
-  GREEN_THEME,
-  CYAN_THEME,
-  ORANGE_THEME,
-} from '@/theme/LightTheme';
+import { BLUE_THEME, AQUA_THEME, PURPLE_THEME, GREEN_THEME, CYAN_THEME, ORANGE_THEME } from '@/theme/LightTheme';
 import {
   DARK_BLUE_THEME,
   DARK_AQUA_THEME,
