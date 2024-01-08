@@ -1,7 +1,17 @@
-export const getRegisterSites = async (userId: number) => {
-  const asyncData = await useFetch('http//', {
-    method: 'get',
+export const getSelectSites = async () => {
+  const runtimeConfig = useRuntimeConfig();
+  const { data, error } = await useFetch('/Sites/GetSelectSites', {
+    method: 'GET',
+    baseURL: runtimeConfig.public.apiUrl,
   });
 
-  return asyncData.data;
+  if (error.value) {
+    console.error(error.value);
+    return;
+  }
+
+  if (data.value) {
+    console.log(data.value);
+    return data.value;
+  }
 };
