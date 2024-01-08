@@ -59,18 +59,10 @@ const rssSites = [
   <div v-for="site in rssSites" :key="site.name" class="mb-4">
     <!-- Title -->
     <div class="d-flex align-center">
-      <img
-        height="16"
-        class="mr-3"
-        :src="'http://www.google.com/s2/favicons?domain=' + site.url"
-      />
+      <img height="16" class="mr-3" :src="'http://www.google.com/s2/favicons?domain=' + site.url" />
       <NuxtLink :to="site.url" target="blank">
         <VHover v-slot="{ isHovering, props }">
-          <h5
-            class="text-h5"
-            v-bind="props"
-            v-bind:class="{ 'text-primary': isHovering }"
-          >
+          <h5 class="text-h5" v-bind="props" v-bind:class="{ 'text-primary': isHovering }">
             {{ site.name }}
           </h5>
         </VHover>
@@ -86,8 +78,7 @@ const rssSites = [
               class="text-subtitle-1 font-weight-medium mt-2"
               v-bind="props"
               v-bind:class="{
-                'text-primary cursor-pointer text-decoration-underline':
-                  isHovering,
+                'text-primary cursor-pointer text-decoration-underline': isHovering,
               }"
             >
               {{ article.title }}

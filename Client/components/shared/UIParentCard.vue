@@ -7,8 +7,7 @@ const props = defineProps<{
 const { title } = props;
 </script>
 
-// ===============================|| Ui Parent
-Card||=============================== //
+// ===============================|| Ui Parent Card||=============================== //
 <template>
   <VCard class="mb-6" elevation="10">
     <VCardItem class="py-4 px-6">

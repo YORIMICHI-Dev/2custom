@@ -27,12 +27,7 @@ const sites = useSitesStore();
             tag="tbody"
           >
             <transition-group>
-              <tr
-                v-for="item in sites.siteList"
-                :key="item.name"
-                class="month-item"
-                draggable
-              >
+              <tr v-for="item in sites.siteList" :key="item.name" class="month-item" draggable>
                 <td>
                   <VBtn size="30" icon variant="flat">
                     <BaselineDensityMediumIcon size="18" class="cursor-move" />
@@ -40,16 +35,12 @@ const sites = useSitesStore();
                 </td>
                 <td>
                   <div class="d-flex align-center">
+                    <img height="16" class="mr-3" :src="'http://www.google.com/s2/favicons?domain=' + item.url" />
                     <h6 class="text-h6 text-no-wrap">{{ item.name }}</h6>
                   </div>
                 </td>
                 <td>
-                  <VChip
-                    rounded="lg"
-                    class="font-weight-bold py-4 px-3"
-                    :color="item.categoryColor"
-                    size="small"
-                  >
+                  <VChip rounded="lg" class="font-weight-bold py-4 px-3" :color="item.categoryColor" size="small">
                     {{ item.category }}
                   </VChip>
                 </td>

@@ -14,19 +14,12 @@ const setting = useSettingStore();
               <ArrowBigUpLineIcon size="22" />
             </VAvatar>
             <div class="pl-4">
-              <h6 class="text-h6 mb-3 mt-n1">スクロールボタンを有効にする</h6>
-              <h5 class="text-subtitle-1 text-medium-emphasis">
-                Scroll Button
-              </h5>
+              <h6 class="text-h6 mb-3 mt-n1">スクロールボタン</h6>
+              <h5 class="text-subtitle-1 text-medium-emphasis">Scroll Button</h5>
             </div>
             <VSpacer />
             <div>
-              <VSwitch
-                class="mr-5"
-                v-model="setting.scrollButton"
-                hide-details
-                color="primary"
-              />
+              <VSwitch class="mr-5" v-model="setting.scrollButton" hide-details color="primary" />
             </div>
           </div>
         </div>

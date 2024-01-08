@@ -3,17 +3,17 @@ const setting = useSettingStore();
 
 // siteNum articleNum max, min
 watchEffect(() => {
-  if (setting.siteNum > 10) {
-    setting.siteNum = 10;
-  } else if (setting.siteNum < 1) {
-    setting.siteNum = 1;
+  if (setting.maxSiteNum > 10) {
+    setting.maxSiteNum = 10;
+  } else if (setting.maxSiteNum < 1) {
+    setting.maxSiteNum = 1;
   }
 });
 watchEffect(() => {
-  if (setting.articleLines > 5) {
-    setting.articleLines = 5;
-  } else if (setting.articleLines < 1) {
-    setting.articleLines = 1;
+  if (setting.maxArticleLines > 5) {
+    setting.maxArticleLines = 5;
+  } else if (setting.maxArticleLines < 1) {
+    setting.maxArticleLines = 1;
   }
 });
 </script>
@@ -30,21 +30,16 @@ watchEffect(() => {
               <LayoutIcon size="22" />
             </VAvatar>
             <div class="pl-4">
-              <h6 class="text-h6 mb-3 mt-n1">サイトレイアウト</h6>
+              <h6 class="text-h6 mb-3 mt-n1">レイアウト</h6>
               <h5 class="text-subtitle-1 text-medium-emphasis">Site Layout</h5>
             </div>
 
             <VSpacer />
             <div class="d-flex mr-2 align-center">
-              <v-radio-group
-                hide-details
-                v-model="setting.format"
-                inline
-                class="d-flex"
-              >
-                <v-radio label="まとめ" color="primary" value="list" />
-                <v-radio label="アンテナ" color="primary" value="gather" />
-              </v-radio-group>
+              <VRadioGroup hide-details v-model="setting.format" inline class="d-flex">
+                <VRadio label="まとめ" color="primary" value="list" />
+                <VRadio label="アンテナ" color="primary" value="gather" />
+              </VRadioGroup>
             </div>
           </div>
         </div>
@@ -57,16 +52,14 @@ watchEffect(() => {
               <RssIcon size="22" />
             </VAvatar>
             <div class="pl-4">
-              <h6 class="text-h6 mb-3 mt-n1">登録サイト数 (最大10)</h6>
-              <h5 class="text-subtitle-1 text-medium-emphasis">
-                Register Site
-              </h5>
+              <h6 class="text-h6 mb-3 mt-n1">登録サイト数</h6>
+              <h5 class="text-subtitle-1 text-medium-emphasis">Register Site</h5>
             </div>
 
             <VSpacer />
             <div class="w-40">
               <VSlider
-                v-model="setting.siteNum"
+                v-model="setting.maxSiteNum"
                 class="align-center"
                 color="primary"
                 step="1"
@@ -76,7 +69,7 @@ watchEffect(() => {
               >
                 <template v-slot:append>
                   <VTextField
-                    v-model="setting.siteNum"
+                    v-model="setting.maxSiteNum"
                     hide-details
                     single-line
                     density="compact"
@@ -98,16 +91,14 @@ watchEffect(() => {
               <ArticleIcon size="22" />
             </VAvatar>
             <div class="pl-4">
-              <h6 class="text-h6 mb-3 mt-n1">記事数 (最大5)</h6>
-              <h5 class="text-subtitle-1 text-medium-emphasis">
-                Article Number
-              </h5>
+              <h6 class="text-h6 mb-3 mt-n1">記事数</h6>
+              <h5 class="text-subtitle-1 text-medium-emphasis">Article Number</h5>
             </div>
 
             <VSpacer />
             <div class="w-40">
               <VSlider
-                v-model="setting.articleLines"
+                v-model="setting.maxArticleLines"
                 class="align-center"
                 color="primary"
                 step="1"
@@ -117,7 +108,7 @@ watchEffect(() => {
               >
                 <template v-slot:append>
                   <VTextField
-                    v-model="setting.articleLines"
+                    v-model="setting.maxArticleLines"
                     hide-details
                     single-line
                     density="compact"

@@ -5,10 +5,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <VListSubheader
-    color="darkText"
-    class="smallCap text-uppercase text-subtitle-2 mt-5 font-weight-bold"
-  >
+  <VListSubheader color="darkText" class="smallCap text-uppercase text-subtitle-2 mt-5 font-weight-bold">
     <span class="mini-icon">
       <DotsIcon size="16" stroke-width="1.5" class="itemClass" />
     </span>

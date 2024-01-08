@@ -1,10 +1,4 @@
-import {
-  ListDetailsIcon,
-  Home2Icon,
-  SettingsIcon,
-  MailIcon,
-  SelectIcon,
-} from 'vue-tabler-icons';
+import { ListDetailsIcon, Home2Icon, SettingsIcon, MailIcon, SelectIcon } from 'vue-tabler-icons';
 import type { SidebarMenu } from '@/types/layout/sidebar';
 
 const sidebarItem: SidebarMenu[] = [

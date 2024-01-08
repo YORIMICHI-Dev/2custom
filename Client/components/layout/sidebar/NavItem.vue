@@ -20,10 +20,7 @@ const { item, level } = props;
       <Icon :item="item.icon" :level="level" />
     </template>
     <VListItemTitle>{{ item.title }}</VListItemTitle>
-    <VListItemSubtitle
-      v-if="item.subCaption"
-      class="text-caption mt-n1 hide-menu"
-    >
+    <VListItemSubtitle v-if="item.subCaption" class="text-caption mt-n1 hide-menu">
       {{ item.subCaption }}
     </VListItemSubtitle>
 

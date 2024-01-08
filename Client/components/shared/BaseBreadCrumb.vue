@@ -14,10 +14,7 @@ const { title, breadcrumbs } = props;
           <!-- Breadcrumbs -->
           <div>
             <h3 class="text-h3 mb-2">{{ title }}</h3>
-            <VBreadcrumbs
-              :items="breadcrumbs"
-              class="text-h6 font-weight-medium pa-0 ml-n1"
-            >
+            <VBreadcrumbs :items="breadcrumbs" class="text-h6 font-weight-medium pa-0 ml-n1">
               <template v-slot:title="{ item }">
                 <h6 class="text-medium-emphasis text-subtitle-1">
                   {{ item.text }}

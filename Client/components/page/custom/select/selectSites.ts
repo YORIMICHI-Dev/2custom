@@ -1,91 +1,107 @@
-import type { siteType } from '@/types/site/siteType';
-
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case 'chat':
-      return 'primary';
-    case 'adult':
-      return 'error';
-    case 'VTuber':
-      return 'info';
-    case 'anime':
-      return 'secondary';
-    default:
-      return 'grey-200';
-  }
+export type SelectSiteType = {
+  category: string;
+  sites: SiteType[];
 };
 
-export const selectSites: siteType[] = [
-  {
-    name: '資格ちゃんねる',
-    url: 'http://shikaku2ch.doorblog.jp/',
-    rssUrl: 'http://shikaku2ch.doorblog.jp/index.rdf',
-    category: 'chat',
-    categoryColor: getStatusColor('chat'),
-  },
-  {
-    name: 'ゴールデンタイムズ',
-    url: 'http://blog.livedoor.jp/goldennews/',
-    rssUrl: 'http://blog.livedoor.jp/goldennews/index.rdf',
-    category: 'chat',
-    categoryColor: getStatusColor('chat'),
-  },
-  {
-    name: 'ハム速',
-    url: 'https://hamusoku.com/',
-    rssUrl: 'https://hamusoku.com/index.rdf',
-    category: 'chat',
-    categoryColor: getStatusColor('chat'),
-  },
-  {
-    name: 'キニ速',
-    url: 'http://blog.livedoor.jp/kinisoku/',
-    rssUrl: 'http://blog.livedoor.jp/kinisoku/index.rdf',
-    category: 'chat',
-    categoryColor: getStatusColor('chat'),
-  },
-  {
-    name: 'ブラブラブラウジング',
-    url: 'http://brow2ing.com/',
-    rssUrl: 'http://brow2ing.com/index.rdf',
-    category: 'chat',
-    categoryColor: getStatusColor('chat'),
-  },
-  {
-    name: 'BIPブログ',
-    url: 'http://bipblog.com/',
-    rssUrl: 'http://bipblog.com/index.rdf',
-    category: 'chat',
-    categoryColor: getStatusColor('chat'),
-  },
-  {
-    name: 'ちゃんねるZ',
-    url: 'http://channelz.blog.fc2.com/',
-    rssUrl: 'http://channelz.blog.fc2.com/?xml',
-    category: 'chat',
-    categoryColor: getStatusColor('chat'),
-  },
-  {
-    name: '不思議.net',
-    url: 'http://world-fusigi.net/',
-    rssUrl: 'http://world-fusigi.net/index.rdf',
-    category: 'chat',
-    categoryColor: getStatusColor('chat'),
-  },
-  {
-    name: 'IT速報',
-    url: 'http://blog.livedoor.jp/itsoku/',
-    rssUrl: 'http://blog.livedoor.jp/itsoku/index.rdf',
-    category: 'chat',
-    categoryColor: getStatusColor('chat'),
-  },
+export type SiteType = {
+  name: string;
+  url: string;
+  selected: boolean;
+};
 
-  // anime
+export const selectSites: SelectSiteType[] = [
   {
-    name: 'ぴこ速',
-    url: 'https://pioncoo.net/',
-    rssUrl: 'https://pioncoo.net/feed',
-    category: 'anime',
-    categoryColor: getStatusColor('anime'),
+    category: 'VIP',
+    sites: [
+      {
+        name: '資格ちゃんねる',
+        url: 'http://shikaku2ch.doorblog.jp/',
+        selected: true,
+      },
+      {
+        name: 'ゴールデンタイムズ',
+        url: 'http://blog.livedoor.jp/goldennews/',
+        selected: true,
+      },
+      {
+        name: 'ハム速',
+        url: 'https://hamusoku.com/',
+        selected: true,
+      },
+      {
+        name: 'キニ速',
+        url: 'http://blog.livedoor.jp/kinisoku/',
+        selected: true,
+      },
+      {
+        name: 'ブラブラブラウジング',
+        url: 'http://brow2ing.com/',
+        selected: true,
+      },
+      {
+        name: 'BIPブログ',
+        url: 'http://bipblog.com/',
+        selected: true,
+      },
+      {
+        name: 'ちゃんねるZ',
+        url: 'http://channelz.blog.fc2.com/',
+        selected: true,
+      },
+      {
+        name: '不思議.net',
+        url: 'http://world-fusigi.net/',
+        selected: true,
+      },
+      {
+        name: 'IT速報',
+        url: 'http://blog.livedoor.jp/itsoku/',
+        selected: false,
+      },
+    ],
+  },
+  {
+    category: 'ニュース',
+    sites: [],
+  },
+  {
+    category: '生活',
+    sites: [],
+  },
+  {
+    category: 'アニメ',
+    sites: [],
+  },
+  {
+    category: 'ゲーム',
+    sites: [],
+  },
+  {
+    category: '漫画',
+    sites: [],
+  },
+  {
+    category: 'VTuber',
+    sites: [],
+  },
+  {
+    category: 'ポケモン',
+    sites: [],
+  },
+  {
+    category: '食べ物',
+    sites: [],
+  },
+  {
+    category: 'ガジェット',
+    sites: [],
+  },
+  {
+    category: '野球',
+    sites: [],
+  },
+  {
+    category: 'ギャンブル',
+    sites: [],
   },
 ];

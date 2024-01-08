@@ -11,21 +11,12 @@ const { item, level } = props;
   <VListGroup no-action>
     <!-- Dropdown -->
     <template v-slot:activator="{ props }">
-      <VListItem
-        v-bind="props"
-        :value="item.title"
-        rounded
-        class="mb-1"
-        color="primary"
-      >
+      <VListItem v-bind="props" :value="item.title" rounded class="mb-1" color="primary">
         <template v-slot:prepend>
           <Icon :item="item.icon" :level="level" />
         </template>
         <VListItemTitle class="mr-auto">{{ item.title }}</VListItemTitle>
-        <VListItemSubtitle
-          v-if="item.subCaption"
-          class="text-caption mt-n1 hide-menu"
-        >
+        <VListItemSubtitle v-if="item.subCaption" class="text-caption mt-n1 hide-menu">
           {{ item.subCaption }}
         </VListItemSubtitle>
       </VListItem>
@@ -34,11 +25,7 @@ const { item, level } = props;
     <!-- Sub Item -->
     <template v-if="item.children">
       <template v-for="(subitem, i) in item.children" :key="i">
-        <LayoutSidebarNavCollapse
-          :item="subitem"
-          v-if="subitem.children"
-          :level="level + 1"
-        />
+        <LayoutSidebarNavCollapse :item="subitem" v-if="subitem.children" :level="level + 1" />
         <LayoutSidebarNavItem :item="subitem" v-else :level="level + 1" />
       </template>
     </template>
