@@ -4,10 +4,10 @@ import type { SettingProps } from '@/types/setting';
 export const useSettingStore = defineStore({
   id: 'setting',
   state: (): SettingProps => ({
-    actTheme: 'GREEN_THEME',
+    actTheme: 'PURPLE_THEME',
     format: 'list',
-    siteNum: 10,
-    articleLines: 5,
+    maxSiteNum: 10,
+    maxArticleLines: 5,
     scrollButton: false,
   }),
 
@@ -20,10 +20,10 @@ export const useSettingStore = defineStore({
       this.format = payload;
     },
     SET_ARTICLE_LINES(payload: number) {
-      this.articleLines = payload;
+      this.maxArticleLines = payload;
     },
     SET_SITE_NUM(payload: number) {
-      this.siteNum = payload;
+      this.maxSiteNum = payload;
     },
     TOGGLE_SCROLL_BUTTON() {
       this.scrollButton = !this.scrollButton;

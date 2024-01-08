@@ -1,7 +1,7 @@
 export type SettingProps = {
   actTheme: string;
   format: 'list' | 'gather';
-  articleLines: number;
-  siteNum: number;
+  maxArticleLines: number;
+  maxSiteNum: number;
   scrollButton: boolean;
 };

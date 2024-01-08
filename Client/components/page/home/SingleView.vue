@@ -58,13 +58,13 @@ const rssSites = [
 <template>
   <div v-for="site in rssSites" :key="site.name" class="mb-4">
     <!-- Title -->
-    <div class="d-flex align-center">
-      <img height="16" class="mr-3" :src="'http://www.google.com/s2/favicons?domain=' + site.url" />
+    <div class="d-flex pa-1 align-center">
+      <img height="18" class="mr-3" :src="'http://www.google.com/s2/favicons?domain=' + site.url" />
       <NuxtLink :to="site.url" target="blank">
         <VHover v-slot="{ isHovering, props }">
-          <h5 class="text-h5" v-bind="props" v-bind:class="{ 'text-primary': isHovering }">
+          <h4 class="text-h4" v-bind="props" v-bind:class="{ 'text-primary': isHovering }">
             {{ site.name }}
-          </h5>
+          </h4>
         </VHover>
       </NuxtLink>
     </div>
@@ -88,5 +88,5 @@ const rssSites = [
         <VDivider class="mt-2" />
       </VListItem>
     </VList>
-  </div>
+    </div>
 </template>

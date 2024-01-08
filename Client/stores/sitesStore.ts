@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
-import type { siteType } from '@/types/site/siteType';
+import type { selectSiteType } from '@/types/site/siteType';
 
 type sitesProps = {
-  siteList: siteType[];
+  siteList: selectSiteType[];
 };
 
 export const useSitesStore = defineStore({
@@ -27,7 +27,7 @@ const getStatusColor = (status: string) => {
   }
 };
 
-const sites: siteType[] = [
+const sites: selectSiteType[] = [
   {
     name: '資格ちゃんねる',
     url: 'http://shikaku2ch.doorblog.jp/',
@@ -88,7 +88,7 @@ const sites: siteType[] = [
     name: 'IT速報',
     url: 'http://blog.livedoor.jp/itsoku/',
     rssUrl: 'http://blog.livedoor.jp/itsoku/index.rdf',
-    category: 'chat',
-    categoryColor: getStatusColor('chat'),
+    category: 'VTuber',
+    categoryColor: getStatusColor('VTuber'),
   },
 ];

@@ -1,4 +1,4 @@
-export type siteType = {
+export type selectSiteType = {
   name: string;
   url: string;
   rssUrl: string;
@@ -6,4 +6,4 @@ export type siteType = {
   categoryColor: string;
 };
 
-type Category = 'chat' | 'sports' | 'adult' | 'VTuber';
+type Category = 'chat' | 'sports' | 'adult' | 'VTuber' | 'anime';
