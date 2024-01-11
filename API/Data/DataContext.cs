@@ -22,10 +22,10 @@ public class DataContext : DbContext
         }
     }
 
-    public virtual DbSet<Sites> Sites {get; set;}
-    public virtual DbSet<Categories> Categories {get; set;}
-    public virtual DbSet<Articles> Articles {get; set;}
-    public virtual DbSet<Users> Users {get; set;}
+    public virtual DbSet<Sites> Sites { get; set; }
+    public virtual DbSet<Categories> Categories { get; set; }
+    public virtual DbSet<Articles> Articles { get; set; }
+    public virtual DbSet<Users> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

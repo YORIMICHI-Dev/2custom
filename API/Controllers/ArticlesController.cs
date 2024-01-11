@@ -31,7 +31,7 @@ public class ArticlesController : ControllerBase
         // Rss feedよりサイトから記事を取得
         IEnumerable<Sites> sites = await _dataContext.Sites.ToListAsync();
 
-        foreach(var site in sites)
+        foreach (var site in sites)
         {
             // feed関数
             Console.WriteLine(site.RssUrl);

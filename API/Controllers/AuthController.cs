@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Text;
-using System.Net;
 
 namespace API.Controllers;
 
@@ -33,7 +32,7 @@ public class AuthController : ControllerBase
         if (user != null) return BadRequest(new ProblemDetails { Title = "Email was already registered." });
 
         // パスワードをハッシュ化し登録
-        byte[] passwordSalt = new byte[128/ 8];
+        byte[] passwordSalt = new byte[128 / 8];
         using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
         {
             rng.GetNonZeroBytes(passwordSalt);
