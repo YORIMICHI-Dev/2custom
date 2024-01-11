@@ -34,8 +34,8 @@ const sites = useSitesStore();
                 </VChip>
               </VCol>
               <VCol md="2" sm="2">
-                <VTooltip activator="parent" location="top">削除</VTooltip>
                 <VBtn size="30" icon variant="flat" class="mr-2 bg-error">
+                  <VTooltip activator="parent" location="top">削除</VTooltip>
                   <TrashIcon size="18" class="" />
                 </VBtn>
               </VCol>
