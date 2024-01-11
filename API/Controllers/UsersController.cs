@@ -23,4 +23,13 @@ public class UsersController : ControllerBase
 
         return Ok(users);
     }
+
+    [HttpGet("GetUsers/User/{userId}")]
+    public async Task<ActionResult<Users>> GetSingleUser(int userId)
+    {
+        Users user = await _dataContext.Users.FindAsync(userId);
+        if (user == null) return NotFound();
+
+        return Ok(user);
+    }
 }
