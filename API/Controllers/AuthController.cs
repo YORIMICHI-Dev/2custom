@@ -22,13 +22,13 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("Register")]
-    public async Task<ActionResult> Register(ConfirmUserDto confirmUserDto)
+    public async Task<ActionResult> Register(RequestUserDto requestUserDto)
     {
         // パスワードと確認用パスワードが一致しているか確認
-        if (confirmUserDto.Password != confirmUserDto.PasswordConfirm) return BadRequest(new ProblemDetails { Title = "Password and Confirm Password are not equal." });
+        if (requestUserDto.Password != requestUserDto.PasswordConfirm) return BadRequest(new ProblemDetails { Title = "Password and Confirm Password are not equal." });
 
         // すでにEmailが登録されているか確認
-        Users user = await _dataContext.Users.FirstOrDefaultAsync(user => user.Email == confirmUserDto.Email);
+        Users user = await _dataContext.Users.FirstOrDefaultAsync(user => user.Email == requestUserDto.Email);
         if (user != null) return BadRequest(new ProblemDetails { Title = "Email was already registered." });
 
         // パスワードをハッシュ化し登録
@@ -38,11 +38,11 @@ public class AuthController : ControllerBase
             rng.GetNonZeroBytes(passwordSalt);
         }
         string passwordSaltPlusString = _config.GetSection("AppSettings:PasswordKey").Value + Convert.ToBase64String(passwordSalt);
-        byte[] passwordHash = GetPasswordHash(confirmUserDto.Password, passwordSalt);
+        byte[] passwordHash = GetPasswordHash(requestUserDto.Password, passwordSalt);
 
         Users registerUser = new Users
         {
-            Email = confirmUserDto.Email,
+            Email = requestUserDto.Email,
             PasswordSalt = passwordSalt,
             PasswordHash = passwordHash
         };
