@@ -15,6 +15,18 @@
     }
 }
 
+.leftSidebar:hover {
+    box-shadow: variables.$box-shadow !important;
+
+    // .mini-icon {
+    //     display: none;
+    // }
+
+    // .mini-text {
+    //     display: block;
+    // }
+}
+
 /*This is for the Vertical sidebar*/
 .scrollnavbar {
     height: calc(100vh - 190px);
