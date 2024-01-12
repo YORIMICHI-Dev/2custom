@@ -4,23 +4,27 @@ using API.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using API.Helpers;
 
 namespace API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class AuthController : ControllerBase
 {
     private readonly DataContext _dataContext;
     private readonly IConfiguration _config;
+    private readonly AuthHelper _authHelper;
     public AuthController(IConfiguration config)
     {
         _dataContext = new DataContext(config);
         _config = config;
+        _authHelper = new AuthHelper(config);
     }
 
+    [AllowAnonymous]
     [HttpPost("Register")]
     public async Task<ActionResult> Register(RequestUserDto requestUserDto)
     {
@@ -38,7 +42,7 @@ public class AuthController : ControllerBase
             rng.GetNonZeroBytes(passwordSalt);
         }
         string passwordSaltPlusString = _config.GetSection("AppSettings:PasswordKey").Value + Convert.ToBase64String(passwordSalt);
-        byte[] passwordHash = GetPasswordHash(requestUserDto.Password, passwordSalt);
+        byte[] passwordHash = _authHelper.GetPasswordHash(requestUserDto.Password, passwordSalt);
 
         Users registerUser = new Users
         {
@@ -54,6 +58,7 @@ public class AuthController : ControllerBase
         return BadRequest(new ProblemDetails { Title = "Failed to register user." });
     }
 
+    [AllowAnonymous]
     [HttpPost("Login")]
     public async Task<ActionResult> Login(LoginUserDto loginUserDto)
     {
@@ -61,22 +66,18 @@ public class AuthController : ControllerBase
         if (user == null) return NotFound(new ProblemDetails { Title = "User is not found." });
 
         // パスワードの確認
-        byte[] passwordHash = GetPasswordHash(loginUserDto.Password, user.PasswordSalt);
+        byte[] passwordHash = _authHelper.GetPasswordHash(loginUserDto.Password, user.PasswordSalt);
         if (!passwordHash.SequenceEqual(user.PasswordHash)) return Unauthorized(new ProblemDetails { Title = "Password is incorrect." });
 
-        return Ok(new { Message = "Login successful" });
+        return Ok(new { token = _authHelper.CreateJwtToken(user.Id, user.Role) });
     }
 
-    private byte[] GetPasswordHash(string password, byte[] passwordSalt)
+    [HttpGet("RefreshToken")]
+    public async Task<IActionResult> RefreshToken()
     {
-        string passwordSaltPlusString = _config.GetSection("AppSettings:PasswordKey").Value + Convert.ToBase64String(passwordSalt);
+        Users user = await _dataContext.Users.Where(user => user.Id == int.Parse(User.FindFirst("userId").Value)).FirstOrDefaultAsync();
+        if (user == null) return NotFound(new ProblemDetails { Title = "User is not found." });
 
-        return KeyDerivation.Pbkdf2(
-            password: password,
-            salt: Encoding.ASCII.GetBytes(passwordSaltPlusString),
-            prf: KeyDerivationPrf.HMACSHA256,
-            iterationCount: 1000000,
-            numBytesRequested: 256 / 8
-        );
+        return Ok (new { token = _authHelper.CreateJwtToken(user.Id, user.Role)});
     }
 }
