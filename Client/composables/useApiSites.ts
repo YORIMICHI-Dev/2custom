@@ -2,8 +2,13 @@ import type {SelectSiteType} from "@/types/site/siteType"
 
 export const getSelectSites = async () => {
   const runtimeConfig = useRuntimeConfig();
-  const { data, error } = await useFetch('/Sites/GetSelectSites', {
+  const tokenCookie = useCookie<string|null>("token");
+  const {data, error, pending} = await useFetch('/Sites/GetSelectSites', {
     method: 'GET',
+    headers: {
+      'Content-Type': "application/json",
+      'Authorization': `Bearer ${tokenCookie.value}`
+    },
     baseURL: runtimeConfig.public.apiUrl,
     transform: (data: any): SelectSiteType[] => {
       const fetchSites = data
@@ -11,12 +16,5 @@ export const getSelectSites = async () => {
     }
   });
 
-  if (error.value) {
-    console.error(error.value);
-    return;
-  }
-
-  if (data.value) {
-    return data;
-  }
+  return {data, error, pending}
 };

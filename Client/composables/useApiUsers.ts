@@ -3,7 +3,7 @@ import type { LoginUserResponse, UpdateUserSettingRequestBody } from "@/types/ap
 export const getLoginUser = async () => {
   const runtimeConfig = useRuntimeConfig();
   const tokenCookie = useCookie<string|null>("token");
-  const {data, error} = await useFetch('/Users/GetLoginUser', {
+  const {data, error, pending} = await useFetch('/Users/GetLoginUser', {
     method: 'GET',
     headers: {
       'Content-Type': "application/json",
@@ -16,18 +16,11 @@ export const getLoginUser = async () => {
     }
   });
 
-  if (error.value) {
-    console.error(error.value);
-    return;
-  }
-
-  if (data.value) {
-    return data;
-  }
+  return {data, error, pending}
 };
 
 
-export const updateUserSetting = async (requestBody: UpdateUserSettingRequestBody) => {
+export const updateUserSetting = async(requestBody: UpdateUserSettingRequestBody) => {
   const runtimeConfig = useRuntimeConfig();
   const tokenCookie = useCookie<string|null>("token");
   const {data, error} = await useFetch('/Users/UpdateUserSetting', {
@@ -40,13 +33,5 @@ export const updateUserSetting = async (requestBody: UpdateUserSettingRequestBod
     baseURL: runtimeConfig.public.apiUrl,
   });
 
-  if (error.value) {
-    console.error(error.value);
-    return;
-  }
-
-  if (data.value) {
-    console.log(data.value)
-    return data;
-  }
+  return {data, error}
 };
