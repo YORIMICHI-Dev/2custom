@@ -69,7 +69,7 @@ public class AuthController : ControllerBase
         byte[] passwordHash = _authHelper.GetPasswordHash(loginUserDto.Password, user.PasswordSalt);
         if (!passwordHash.SequenceEqual(user.PasswordHash)) return Unauthorized(new ProblemDetails { Title = "Password is incorrect." });
 
-        return Ok(new { token = _authHelper.CreateJwtToken(user.Id, user.Role) });
+        return Ok(new { Token = _authHelper.CreateJwtToken(user.Id, user.Role) });
     }
 
     [HttpGet("RefreshToken")]
@@ -78,6 +78,6 @@ public class AuthController : ControllerBase
         Users user = await _dataContext.Users.Where(user => user.Id == int.Parse(User.FindFirst("userId").Value)).FirstOrDefaultAsync();
         if (user == null) return NotFound(new ProblemDetails { Title = "User is not found." });
 
-        return Ok (new { token = _authHelper.CreateJwtToken(user.Id, user.Role)});
+        return Ok (new { Token = _authHelper.CreateJwtToken(user.Id, user.Role)});
     }
 }
