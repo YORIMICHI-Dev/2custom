@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { SidebarProps } from '@/types/layout/sidebar';
+import type { SidebarProps } from '@/types/stores/sidebar';
 
 export const useSidebarStore = defineStore({
   id: 'sidebar',

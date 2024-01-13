@@ -1,9 +1,3 @@
-export type SidebarProps = {
-  sidebarDrawer: boolean | null;
-  customizerDrawer: boolean;
-  miniSidebar: boolean;
-};
-
 export type SidebarMenu = {
   header?: string;
   title?: string;
