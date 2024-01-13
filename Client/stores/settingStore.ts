@@ -3,17 +3,17 @@ import type { SettingProps } from '~/types/stores/setting';
 
 // LoginUserを取得し初期化
 const {data} = await getLoginUser();
-const colorTheme = data.value?.colorTheme || "BLUE_THEME";
-const showScrollButton = data.value?.showScrollButton ?? false;
+const initialColorTheme = data.value?.colorTheme || "BLUE_THEME";
+const initialShowScrollButton = data.value?.showScrollButton ?? false;
 
 export const useSettingStore = defineStore({
   id: 'setting',
   state: (): SettingProps => ({
-    actTheme: colorTheme,
+    actTheme: initialColorTheme,
     format: 'list',
     maxSiteNum: 10,
     maxArticleLines: 5,
-    scrollButton: showScrollButton,
+    scrollButton: initialShowScrollButton,
   }),
 
   getters: {},

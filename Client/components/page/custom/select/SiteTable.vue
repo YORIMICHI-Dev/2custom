@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type {SiteType} from "@/types/site/siteType"
-const {data: selectSites, error} = await getSelectSites()
+import type {SelectSite} from "@/types/api/useApiSites"
+const selectSitesStore = useCategorySelectSitesStore()
 
-const clickSelected = (site: SiteType) => {
+const clickSelected = (site: SelectSite) => {
   site.selected = !site.selected;
 };
 </script>
 
 <template>
-  <div v-for="select in selectSites" :key="select.category">
+  <div v-for="select in selectSitesStore.categorySelectSites" :key="select.category">
      <SharedUIParentCard :title="select.category">
       <VRow>
         <VCol v-for="site in select.selectSites" rows="12" md="3" sm="12">
