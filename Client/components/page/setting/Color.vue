@@ -2,37 +2,44 @@
 const setting = useSettingStore();
 
 // themes color options
-const themeColors = ref([
-  { name: 'BLUE_THEME', bg: 'themeBlue' },
-  { name: 'PURPLE_THEME', bg: 'themePurple' },
-  { name: 'CYAN_THEME', bg: 'themeCyan' },
-  { name: 'ORANGE_THEME', bg: 'themeOrange' },
-]);
+const themeColors = {
+  light: [
+    { name: 'BLUE_THEME', bg: 'themeBlue' },
+    { name: 'PURPLE_THEME', bg: 'themePurple' },
+    { name: 'CYAN_THEME', bg: 'themeCyan' },
+    { name: 'ORANGE_THEME', bg: 'themeOrange' },
+  ],
+  dark: [
+    { name: 'DARK_BLUE_THEME', bg: 'themeDarkBlue' },
+    { name: 'DARK_PURPLE_THEME', bg: 'themeDarkPurple' },
+    { name: 'DARK_CYAN_THEME', bg: 'themeDarkCyan' },
+    { name: 'DARK_ORANGE_THEME', bg: 'themeDarkOrange' }
+  ]
+};
 
-// Dark Theme Colors
-const darkThemeColors = ref([
-  { name: 'DARK_BLUE_THEME', bg: 'themeDarkBlue' },
-  { name: 'DARK_PURPLE_THEME', bg: 'themeDarkPurple' },
-  { name: 'DARK_CYAN_THEME', bg: 'themeDarkCyan' },
-  { name: 'DARK_ORANGE_THEME', bg: 'themeDarkOrange' },
-]);
 
 // カラー選択によるテーマの切り替え
-const selectedTheme = ref(setting.actTheme);
 const changeTheme = (theme: string) => {
-  selectedTheme.value = theme;
   setting.actTheme = theme;
 };
 
 // カラーテーマによるlightとdarkの切り替え
-const backColor = ref('light');
-watch(backColor, () => {
-  if (backColor.value === 'light') {
-    selectedTheme.value = setting.actTheme.replace('DARK_', '');
-    setting.actTheme = selectedTheme.value;
-  } else if (backColor.value === 'dark') {
-    selectedTheme.value = 'DARK_' + setting.actTheme;
-    setting.actTheme = selectedTheme.value;
+// テーマの監視
+const backColor = setting.actTheme.includes("DARK_") ? "dark": "light";
+const refBackColor = ref(backColor)
+
+// カラーテーマの監視
+const currentThemeColors = setting.actTheme.includes("DARK_") ? themeColors.dark: themeColors.light;
+const refThemeColors = ref(currentThemeColors)
+
+// カラーテーマによるlightとdarkの切り替え、カラーテーマリストと現在のカラーをテーマに切り替える
+watch(refBackColor, () => {
+  if (refBackColor.value === 'light') {
+    refThemeColors.value = themeColors.light
+    setting.actTheme = setting.actTheme.replace('DARK_', '');
+  } else if (refBackColor.value === 'dark') {
+    refThemeColors.value = themeColors.dark
+    setting.actTheme = 'DARK_' + setting.actTheme;
   }
 });
 </script>
@@ -42,23 +49,23 @@ watch(backColor, () => {
     <v-card elevation="10">
       <v-card-item>
         <v-card-title class="text-h4">テーマカラー</v-card-title>
+        <!-- テーマ -->
         <div>
-          <!-- サイトレイアウト -->
           <div class="d-flex align-center mt-7">
-            <VAvatar v-if="backColor === 'light'" size="48" class="mr-2" rounded="md" color="lightprimary">
+            <VAvatar v-if="refBackColor === 'light'" size="48" class="mr-2" rounded="md" color="lightprimary">
               <SunIcon />
             </VAvatar>
             <VAvatar v-else size="48" class="mr-2" rounded="md" color="lightprimary">
               <MoonIcon size="22" />
             </VAvatar>
             <div class="pl-4">
-              <h6 class="text-h6 mb-3 mt-n1">カラーテーマ</h6>
+              <h6 class="text-h6 mb-3 mt-n1">テーマ</h6>
               <h5 class="text-subtitle-1 text-medium-emphasis">Theme</h5>
             </div>
 
             <VSpacer />
             <div class="d-flex mr-2 align-center">
-              <v-radio-group hide-details v-model="backColor" inline class="d-flex">
+              <v-radio-group hide-details v-model="refBackColor" inline class="d-flex">
                 <v-radio label="ライト" color="primary" value="light" />
                 <v-radio label="ダーク" color="primary" value="dark" />
               </v-radio-group>
@@ -81,15 +88,15 @@ watch(backColor, () => {
             <VSpacer />
             <VRow class="w-25 mb-1 justify-end mr-5">
               <VItemGroup mandatory v-model="setting.actTheme" class="v-row">
-                <!-- Light Theme -->
+                <!-- Theme -->
                 <VCol
-                  v-if="backColor === 'light'"
-                  md="3"
-                  xs="6"
-                  v-for="theme in themeColors"
-                  :key="theme.name"
-                  class="pa-2"
+                md="3"
+                xs="6"
+                v-for="theme in refThemeColors"
+                :key="theme.name"
+                class="pa-2"
                 >
+                <VItem v-slot="{ isSelected, toggle }" :value="theme.name">
                   <VSheet
                     rounded="md"
                     class="border border-primary cursor-pointer d-block pa-4 text-center hover-btns"
@@ -97,25 +104,10 @@ watch(backColor, () => {
                     @click="changeTheme(theme.name)"
                   >
                     <VAvatar :class="theme.bg" size="25">
-                      <CheckIcon color="white" size="18" v-if="selectedTheme === theme.name" />
+                      <CheckIcon color="white" size="18" v-if="isSelected" />
                     </VAvatar>
                   </VSheet>
-                </VCol>
-
-                <!-- Dark Theme -->
-                <VCol v-else lg="3" sm="4" v-for="theme in darkThemeColors" :key="theme.bg" class="pa-2">
-                  <VItem v-slot="{ isSelected, toggle }" :value="theme.name">
-                    <VSheet
-                      rounded="md"
-                      class="border border-primary cursor-pointer d-block pa-4 text-center hover-btns"
-                      elevation="9"
-                      @click="toggle"
-                    >
-                      <v-avatar :class="theme.bg" size="25">
-                        <CheckIcon color="white" size="18" v-if="isSelected" />
-                      </v-avatar>
-                    </VSheet>
-                  </VItem>
+                </VItem>
                 </VCol>
               </VItemGroup>
             </VRow>

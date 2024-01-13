@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const router = useRouter();
+const setting = useSettingStore()
 
-const clickSaveSetting = () => {
-  // put setting
+const clickSaveSetting = async () => {
+  await updateUserSetting({colorTheme: setting.actTheme, showScrollButton: setting.scrollButton})
 };
 
 const clickCancelSetting = () => {
-  // 元の設定を再度割り当てる
   router.push('/');
 };
 </script>

@@ -1,14 +1,19 @@
 import { defineStore } from 'pinia';
-import type { SettingProps } from '@/types/setting';
+import type { SettingProps } from '~/types/stores/setting';
+
+// Userを取得
+const loginUser = await getLoginUser();
+const colorTheme = loginUser?.value?.colorTheme || "BLUE_THEME";
+const showScrollButton = loginUser?.value?.showScrollButton ?? false;
 
 export const useSettingStore = defineStore({
   id: 'setting',
   state: (): SettingProps => ({
-    actTheme: 'PURPLE_THEME',
+    actTheme: colorTheme,
     format: 'list',
     maxSiteNum: 10,
     maxArticleLines: 5,
-    scrollButton: false,
+    scrollButton: showScrollButton,
   }),
 
   getters: {},
