@@ -26,6 +26,7 @@ public class DataContext : DbContext
     public virtual DbSet<Categories> Categories { get; set; }
     public virtual DbSet<Articles> Articles { get; set; }
     public virtual DbSet<Users> Users { get; set; }
+    public virtual DbSet<UserSites> UserSites {get; set;}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -39,9 +40,12 @@ public class DataContext : DbContext
             .HasKey(category => category.Id);
         modelBuilder.Entity<Articles>()
             .ToTable("Articles", "Custom")
-            .HasKey(article => article.Id);
+            .HasKey(article => new { article.SiteId, article.Title });
         modelBuilder.Entity<Users>()
             .ToTable("Users", "Custom")
             .HasKey(user => user.Id);
+        modelBuilder.Entity<UserSites>()
+            .ToTable("UserSites", "Custom")
+            .HasKey(userSite => new { userSite.UserId, userSite.SiteId });
     }
 }
