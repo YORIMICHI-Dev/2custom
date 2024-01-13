@@ -19,8 +19,8 @@ public class SitesController : ControllerBase
         _dataContext = new DataContext(config);
     }
 
-    [HttpGet("GetSelectSites")]
-    public async Task<ActionResult<IEnumerable<SelectSitesDto>>> GetSites()
+    [HttpGet("GetCategorySelectSites")]
+    public async Task<ActionResult<CategorySelectSitesDto>> GetCategorySelectSites()
     {
         Users user = await _dataContext.Users.Where(user => user.Id == int.Parse(User.FindFirst("userId").Value)).FirstOrDefaultAsync();
         if (user == null) return NotFound(new ProblemDetails { Title = "User is not found." });
@@ -36,7 +36,7 @@ public class SitesController : ControllerBase
             .ToListAsync();
 
         // カテゴリーごとにサイトを分類
-        List<SelectSitesDto> selectSitesDtos = new List<SelectSitesDto>();
+        List<CategorySelectSiteDto> selectSitesDtos = new List<CategorySelectSiteDto>();
         foreach (var category in categories)
         {
             // カテゴリーが一致するサイトを抽出
@@ -50,7 +50,7 @@ public class SitesController : ControllerBase
                 Selected = registeredSiteIdList.Contains(site.Id)
             }).ToList();
 
-            var selectSitesDto = new SelectSitesDto
+            var selectSitesDto = new CategorySelectSiteDto
             {
                 Category = category.Category,
                 SelectSites = selectSiteDtos
@@ -58,21 +58,35 @@ public class SitesController : ControllerBase
             selectSitesDtos.Add(selectSitesDto);
         }
 
-        return Ok(selectSitesDtos);
+        CategorySelectSitesDto categorySelectSitesDto = new CategorySelectSitesDto
+        {
+            CategorySelectSites = selectSitesDtos
+        };
+
+        return Ok(categorySelectSitesDto);
     }
 
     [HttpGet("GetRegisteredSites")]
-    public async Task<ActionResult<IEnumerable<int>>> GetRegisteredSites()
+    public async Task<ActionResult<RegisteredSitesDto>> GetRegisteredSites()
     {
         Users user = await _dataContext.Users.Where(user => user.Id == int.Parse(User.FindFirst("userId").Value)).FirstOrDefaultAsync();
         if (user == null) return NotFound(new ProblemDetails { Title = "User is not found." });
 
-        IEnumerable<int> registeredSiteIdList = await _dataContext.UserSites
-            .Where(userSite => userSite.UserId == user.Id)
-            .Select(userSite => userSite.SiteId)
-            .ToListAsync();
+        var registeredSites = _dataContext.UserSites
+            .Where(us => us.UserId == user.Id)
+            .Join(_dataContext.Sites,
+                userSite => userSite.SiteId,
+                site => site.Id,
+                (userSite, site) => new RegisteredSiteDto
+                {
+                    SiteId = userSite.SiteId,
+                    SiteName = site.Name,
+                    Order = userSite.Order // 仮定: UserSitesにOrderプロパティが存在する場合
+                })
+            .ToList();
+        RegisteredSitesDto registeredSitesDto = new RegisteredSitesDto{ RegisteredSites = registeredSites};
 
-        return Ok(registeredSiteIdList);
+        return Ok(registeredSitesDto);
     }
 
     [HttpPut("RegisterSites")]
@@ -89,7 +103,7 @@ public class SitesController : ControllerBase
 
         foreach(var siteId in requestUserSitesDto.SiteIdList)
         {
-            _dataContext.UserSites.Add(new UserSites { UserId = user.Id, SiteId = siteId });
+            _dataContext.UserSites.Add(new UserSites { UserId = user.Id, SiteId = siteId, Order = 1, });
         }
 
         // データベースを更新

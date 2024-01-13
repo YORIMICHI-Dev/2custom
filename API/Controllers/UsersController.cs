@@ -27,8 +27,8 @@ public class UsersController : ControllerBase
         return Ok(users);
     }
 
-    [HttpGet("GetUsers/User")]
-    public async Task<ActionResult<Users>> GetSingleUser()
+    [HttpGet("GetLoginUser")]
+    public async Task<ActionResult<Users>> GetLoginUser()
     {
         Users loginUser = await _dataContext.Users.FirstOrDefaultAsync(user => user.Id.ToString() == User.FindFirst("userId").Value);
         if (loginUser == null) return NotFound(new ProblemDetails { Title = "User is not found." });
@@ -37,7 +37,7 @@ public class UsersController : ControllerBase
         return Ok(loginUser);
     }
 
-    [HttpPut("UpdateUsersSetting/User")]
+    [HttpPut("UpdateUserSetting")]
     public async Task<ActionResult> UpdateUserSetting(UpdateUserSettingDto updateUserSettingDto)
     {
         Users loginUser = await _dataContext.Users.FirstOrDefaultAsync(user => user.Id.ToString() == User.FindFirst("userId").Value);
@@ -46,7 +46,6 @@ public class UsersController : ControllerBase
         // ユーザーの設定を更新
         loginUser.ColorTheme = updateUserSettingDto.ColorTheme;
         loginUser.ShowScrollButton = updateUserSettingDto.ShowScrollButton;
-
 
         _dataContext.Update(loginUser);
 
