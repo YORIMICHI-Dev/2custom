@@ -50,7 +50,7 @@ public class UsersController : ControllerBase
         _dataContext.Update(loginUser);
 
         int result = await _dataContext.SaveChangesAsync();
-        if (result > 0) return Ok(new {Message = "Update user setting"});
+        if (result > 0) return Ok(new { Message = "Update user setting" });
 
         return BadRequest(new ProblemDetails { Title = "Failed to update user setting" });
     }

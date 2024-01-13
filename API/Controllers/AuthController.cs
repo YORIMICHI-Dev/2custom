@@ -78,6 +78,6 @@ public class AuthController : ControllerBase
         Users user = await _dataContext.Users.Where(user => user.Id == int.Parse(User.FindFirst("userId").Value)).FirstOrDefaultAsync();
         if (user == null) return NotFound(new ProblemDetails { Title = "User is not found." });
 
-        return Ok (new { Token = _authHelper.CreateJwtToken(user.Id, user.Role)});
+        return Ok(new { Token = _authHelper.CreateJwtToken(user.Id, user.Role) });
     }
 }

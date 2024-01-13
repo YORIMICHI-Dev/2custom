@@ -23,16 +23,17 @@ builder.Services.AddCors((options) =>
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options => {
+    .AddJwtBearer(options =>
+    {
         options.TokenValidationParameters = new TokenValidationParameters()
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
                     builder.Configuration.GetSection("AppSettings:JwtKey").Value
                 )),
-                ValidateIssuer = false,
-                ValidateAudience = false
-            };
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
     });
 
 // Add services to the container.

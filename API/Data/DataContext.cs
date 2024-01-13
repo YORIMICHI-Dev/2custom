@@ -26,7 +26,7 @@ public class DataContext : DbContext
     public virtual DbSet<Categories> Categories { get; set; }
     public virtual DbSet<Articles> Articles { get; set; }
     public virtual DbSet<Users> Users { get; set; }
-    public virtual DbSet<UserSites> UserSites {get; set;}
+    public virtual DbSet<UserSites> UserSites { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

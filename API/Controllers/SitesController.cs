@@ -88,9 +88,9 @@ public class SitesController : ControllerBase
                     Url = combined.site.Url,
                     Category = category.Category,
                     Order = combined.userSite.Order
-            })
+                })
         .ToList();
-        RegisteredSitesDto registeredSitesDto = new RegisteredSitesDto{ RegisteredSites = registeredSites};
+        RegisteredSitesDto registeredSitesDto = new RegisteredSitesDto { RegisteredSites = registeredSites };
 
         return Ok(registeredSitesDto);
     }
@@ -107,14 +107,14 @@ public class SitesController : ControllerBase
         var existingUserSites = _dataContext.UserSites.Where(userSite => userSite.UserId == user.Id);
         _dataContext.UserSites.RemoveRange(existingUserSites);
 
-        foreach(var siteId in requestUserSitesDto.SiteIdList)
+        foreach (var siteId in requestUserSitesDto.SiteIdList)
         {
             _dataContext.UserSites.Add(new UserSites { UserId = user.Id, SiteId = siteId, Order = 1, });
         }
 
         // データベースを更新
         int result = await _dataContext.SaveChangesAsync();
-        if (result > 0) return Ok(new { Message = "Register sites."});
+        if (result > 0) return Ok(new { Message = "Register sites." });
 
         return BadRequest(new ProblemDetails { Title = "Failed to register sites." });
     }
