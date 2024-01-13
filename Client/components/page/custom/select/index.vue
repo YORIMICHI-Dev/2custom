@@ -1,18 +1,18 @@
 <script setup lang="ts">
-const router = useRouter()
-const updating = ref(false)
-const selectSitesStore = useCategorySelectSitesStore()
+const router = useRouter();
+const updating = ref(false);
+const selectSitesStore = useCategorySelectSitesStore();
 
-const clickSaveSites = async() => {
+const clickSaveSites = async () => {
   // updating.value = true
   // const {data, error} = await registerSites({siteIdList: []})
   // updating.value = false
-  console.log(selectSitesStore.categorySelectSites)
-}
+  console.log(selectSitesStore.categorySelectSites);
+};
 
 const clickCancelSetting = () => {
-  router.push("/")
-}
+  router.push('/');
+};
 </script>
 
 <template>
@@ -23,12 +23,12 @@ const clickCancelSetting = () => {
 
         <!-- Submit -->
         <div class="d-flex justify-end mt-5">
-        <VBtn size="large" color="primary" class="mr-4" flat @click="clickSaveSites">
-          <VProgressCircular v-if="updating" indeterminate size="24" color="white" />
-          <span v-else>Save</span>
-        </VBtn>
-        <VBtn size="large" class="bg-lighterror text-error" flat @click="clickCancelSetting">Cancel</VBtn>
-      </div>
+          <VBtn size="large" color="primary" class="mr-4" flat @click="clickSaveSites">
+            <VProgressCircular v-if="updating" indeterminate size="24" color="white" />
+            <span v-else>Save</span>
+          </VBtn>
+          <VBtn size="large" class="bg-lighterror text-error" flat @click="clickCancelSetting">Cancel</VBtn>
+        </div>
       </VCard>
     </VCol>
   </VRow>

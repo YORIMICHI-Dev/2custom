@@ -1,6 +1,5 @@
 <script setup lang="ts">
-// feature fetch from db
-const sites = useSitesStore();
+const registeredSitesStore = useRegisteredSitesStore();
 </script>
 
 <template>
@@ -9,12 +8,12 @@ const sites = useSitesStore();
       <SharedUIParentCard title="サイト表示順（ドラッグ）">
         <draggable
           class="dragArea list-group cursor-move"
-          :list="sites.siteList"
+          :list="registeredSitesStore.registeredSites"
           :animation="300"
           ghost-class="ghost-card"
           group="sites"
         >
-          <div v-for="item in sites.siteList" :key="item.name" class="py-2 px-10">
+          <div v-for="registerSite in registeredSitesStore.registeredSites" :key="registerSite.name" class="py-2 px-10">
             <VRow>
               <VCol md="2" sm="2">
                 <VBtn size="30" icon variant="flat" class="">
@@ -23,14 +22,14 @@ const sites = useSitesStore();
               </VCol>
               <VCol md="6" sm="6">
                 <div class="d-flex align-center">
-                  <img height="16" class="mr-3" :src="'http://www.google.com/s2/favicons?domain=' + item.url" />
-                  <h5 class="text-h5 text-no-wrap">{{ item.name }}</h5>
+                  <img height="16" class="mr-3" :src="'http://www.google.com/s2/favicons?domain=' + registerSite.url" />
+                  <h5 class="text-h5 text-no-wrap">{{ registerSite.name }}</h5>
                 </div>
               </VCol>
               <VCol md="2" sm="2">
                 <!-- Category -->
-                <VChip rounded="lg" class="font-weight-bold py-4 px-3" :color="item.categoryColor" size="small">
-                  {{ item.category }}
+                <VChip rounded="lg" class="font-weight-bold py-4 px-3" color="primary" size="small">
+                  {{ registerSite.category }}
                 </VChip>
               </VCol>
               <VCol md="2" sm="2">

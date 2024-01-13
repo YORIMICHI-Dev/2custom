@@ -1,5 +1,5 @@
-import type { CategorySelectSites } from "../api/useApiSites";
+import type { CategorySelectSites } from '../api/useApiSites';
 
 export type CategorySelectSitesProps = {
-    categorySelectSites: CategorySelectSites[],
+  categorySelectSites: CategorySelectSites[];
 };

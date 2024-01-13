@@ -1,12 +1,15 @@
 <script setup lang="ts">
 const router = useRouter();
 const setting = useSettingStore();
-const updating = ref(false)
+const updating = ref(false);
 
-const clickSaveSetting = async() => {
-  updating.value = true
-  const { data, error } = await updateUserSetting({colorTheme: setting.actTheme, showScrollButton: setting.scrollButton})
-  updating.value = false
+const clickSaveSetting = async () => {
+  updating.value = true;
+  const { data, error } = await updateUserSetting({
+    colorTheme: setting.actTheme,
+    showScrollButton: setting.scrollButton,
+  });
+  updating.value = false;
 };
 
 const clickCancelSetting = () => {

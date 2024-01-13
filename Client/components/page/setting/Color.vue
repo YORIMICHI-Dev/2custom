@@ -13,10 +13,9 @@ const themeColors = {
     { name: 'DARK_BLUE_THEME', bg: 'themeDarkBlue' },
     { name: 'DARK_PURPLE_THEME', bg: 'themeDarkPurple' },
     { name: 'DARK_CYAN_THEME', bg: 'themeDarkCyan' },
-    { name: 'DARK_ORANGE_THEME', bg: 'themeDarkOrange' }
-  ]
+    { name: 'DARK_ORANGE_THEME', bg: 'themeDarkOrange' },
+  ],
 };
-
 
 // カラー選択によるテーマの切り替え
 const changeTheme = (theme: string) => {
@@ -25,20 +24,20 @@ const changeTheme = (theme: string) => {
 
 // カラーテーマによるlightとdarkの切り替え
 // テーマの監視
-const backColor = setting.actTheme.includes("DARK_") ? "dark": "light";
-const refBackColor = ref(backColor)
+const backColor = setting.actTheme.includes('DARK_') ? 'dark' : 'light';
+const refBackColor = ref(backColor);
 
 // カラーテーマの監視
-const currentThemeColors = setting.actTheme.includes("DARK_") ? themeColors.dark: themeColors.light;
-const refThemeColors = ref(currentThemeColors)
+const currentThemeColors = setting.actTheme.includes('DARK_') ? themeColors.dark : themeColors.light;
+const refThemeColors = ref(currentThemeColors);
 
 // カラーテーマによるlightとdarkの切り替え、カラーテーマリストと現在のカラーをテーマに切り替える
 watch(refBackColor, () => {
   if (refBackColor.value === 'light') {
-    refThemeColors.value = themeColors.light
+    refThemeColors.value = themeColors.light;
     setting.actTheme = setting.actTheme.replace('DARK_', '');
   } else if (refBackColor.value === 'dark') {
-    refThemeColors.value = themeColors.dark
+    refThemeColors.value = themeColors.dark;
     setting.actTheme = 'DARK_' + setting.actTheme;
   }
 });
@@ -89,25 +88,19 @@ watch(refBackColor, () => {
             <VRow class="w-25 mb-1 justify-end mr-5">
               <VItemGroup mandatory v-model="setting.actTheme" class="v-row">
                 <!-- Theme -->
-                <VCol
-                md="3"
-                xs="6"
-                v-for="theme in refThemeColors"
-                :key="theme.name"
-                class="pa-2"
-                >
-                <VItem v-slot="{ isSelected, toggle }" :value="theme.name">
-                  <VSheet
-                    rounded="md"
-                    class="border border-primary cursor-pointer d-block pa-4 text-center hover-btns"
-                    elevation="9"
-                    @click="changeTheme(theme.name)"
-                  >
-                    <VAvatar :class="theme.bg" size="25">
-                      <CheckIcon color="white" size="18" v-if="isSelected" />
-                    </VAvatar>
-                  </VSheet>
-                </VItem>
+                <VCol md="3" xs="6" v-for="theme in refThemeColors" :key="theme.name" class="pa-2">
+                  <VItem v-slot="{ isSelected }" :value="theme.name">
+                    <VSheet
+                      rounded="md"
+                      class="border border-primary cursor-pointer d-block pa-4 text-center hover-btns"
+                      elevation="9"
+                      @click="changeTheme(theme.name)"
+                    >
+                      <VAvatar :class="theme.bg" size="25">
+                        <CheckIcon color="white" size="18" v-if="isSelected" />
+                      </VAvatar>
+                    </VSheet>
+                  </VItem>
                 </VCol>
               </VItemGroup>
             </VRow>

@@ -1,11 +1,11 @@
 export type LoginUserResponse = {
-    id: number,
-    email: string,
-    colorTheme: string,
-    showScrollButton: boolean,
-}
+  id: number;
+  email: string;
+  colorTheme: string;
+  showScrollButton: boolean;
+};
 
 export type UpdateUserSettingRequestBody = {
-    colorTheme: string,
-    showScrollButton: boolean
-}
+  colorTheme: string;
+  showScrollButton: boolean;
+};

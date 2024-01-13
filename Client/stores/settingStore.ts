@@ -2,8 +2,8 @@ import { defineStore } from 'pinia';
 import type { SettingProps } from '~/types/stores/setting';
 
 // LoginUserを取得し初期化
-const {data} = await getLoginUser();
-const initialColorTheme = data.value?.colorTheme || "BLUE_THEME";
+const { data } = await getLoginUser();
+const initialColorTheme = data.value?.colorTheme || 'BLUE_THEME';
 const initialShowScrollButton = data.value?.showScrollButton ?? false;
 
 export const useSettingStore = defineStore({
