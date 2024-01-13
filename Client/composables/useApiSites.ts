@@ -23,7 +23,7 @@ export const getCategorySelectSites = async () => {
 export const getRegisteredSites = async () => {
   const runtimeConfig = useRuntimeConfig();
   const tokenCookie = useCookie<string|null>("token");
-  const {data, error} = await useFetch('/Sites/GetRegistered', {
+  const {data, error} = await useFetch('/Sites/GetRegisteredSites', {
     method: 'GET',
     headers: {
       'Content-Type': "application/json",

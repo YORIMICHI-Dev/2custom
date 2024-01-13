@@ -77,13 +77,19 @@ public class SitesController : ControllerBase
             .Join(_dataContext.Sites,
                 userSite => userSite.SiteId,
                 site => site.Id,
-                (userSite, site) => new RegisteredSiteDto
+                (userSite, site) => new { userSite, site })
+            .Join(_dataContext.Categories,
+                combined => combined.site.CategoryId,
+                category => category.Id,
+                (combined, category) => new RegisteredSiteDto
                 {
-                    SiteId = userSite.SiteId,
-                    SiteName = site.Name,
-                    Order = userSite.Order // 仮定: UserSitesにOrderプロパティが存在する場合
-                })
-            .ToList();
+                    Id = combined.userSite.SiteId,
+                    Name = combined.site.Name,
+                    Url = combined.site.Url,
+                    Category = category.Category,
+                    Order = combined.userSite.Order
+            })
+        .ToList();
         RegisteredSitesDto registeredSitesDto = new RegisteredSitesDto{ RegisteredSites = registeredSites};
 
         return Ok(registeredSitesDto);

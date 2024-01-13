@@ -5,7 +5,7 @@ const { data, error } = await getCategorySelectSites()
 const initialSelectSites = data.value?.categorySelectSites || [];
 
 export const useCategorySelectSitesStore = defineStore({
-  id: 'registeredSites',
+  id: 'categorySelectSites',
   state: (): CategorySelectSitesProps => ({
     categorySelectSites: initialSelectSites,
   }),

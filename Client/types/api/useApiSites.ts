@@ -22,8 +22,10 @@ export type GetRegisteredSitesResponse = {
 
 
 export type RegisteredSite = {
-  siteId: number,
-  siteName: string,
+  id: number,
+  name: string,
+  url: string,
+  category: string,
   order: number,
 }
 
