@@ -13,9 +13,12 @@
 @use './components/VShadow';
 @use './components/VSwitch';
 @use './components/VTable';
+@use './components/VTextarea';
+@use './components/VTextField';
 @use './components/VTooltip';
 
 // layout
+@use './layout/authentication';
 @use './layout/container';
 @use './layout/dark';
 @use './layout/reboot';
