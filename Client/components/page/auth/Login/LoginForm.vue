@@ -19,7 +19,10 @@ const clickLogin = async() => {
     const {data, error} = await login({email: email.value as string, password: password.value as string})
 
     if (data.value) {
-      const loginToken = useCookie<string|null>("token")
+      const loginToken = useCookie<string|null>("token", {
+        sameSite: true,
+        secure: true,
+      })
       loginToken.value = data.value.token
       router.push('/');
     } else if (error.value) {

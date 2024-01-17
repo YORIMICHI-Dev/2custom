@@ -1,5 +1,16 @@
 <script setup lang="ts">
-import { Logout2Icon } from 'vue-tabler-icons';
+import { LoginIcon, Logout2Icon } from 'vue-tabler-icons';
+const router = useRouter()
+const tokenCookie = useCookie<string|null>("token")
+
+const clickLogin = () => {
+  router.push("/auth/login")
+}
+
+const clickLogout = () => {
+  tokenCookie.value = null
+  router.push("/auth/login")
+}
 </script>
 
 <template>
@@ -9,9 +20,17 @@ import { Logout2Icon } from 'vue-tabler-icons';
         <h6 class="mb-n1 text-h6 textPrimary">Anyname</h6>
         <span class="text-subtitle-2 textSecondary">Anyrole</span>
       </div>
-      <VAvatar variant="text" icon rounded="md" color="primary" to="/logout" width="20">
-        <Logout2Icon width="20" />
-        <VTooltip activator="parent" location="top">ログアウト</VTooltip>
+
+      <!-- Login -->
+      <VAvatar v-if="!tokenCookie" variant="text" icon rounded="md" color="primary" width="20" class="cursor-pointer" @click="clickLogin">
+        <LoginIcon width="20" />
+        <VTooltip activator="parent" location="top">ログイン</VTooltip>
+      </VAvatar>
+
+      <!-- Logout -->
+      <VAvatar v-else variant="text" icon rounded="md" color="primary" width="20" class="cursor-pointer" @click="clickLogout">
+          <Logout2Icon width="20" />
+          <VTooltip activator="parent" location="top">ログアウト</VTooltip>
       </VAvatar>
     </div>
   </VSheet>
