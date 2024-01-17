@@ -1,23 +1,32 @@
 import { defineStore } from 'pinia';
-import type { SettingProps } from '~/types/stores/setting';
+import type { SettingProps } from '@/types/stores/setting';
 
-// LoginUserを取得し初期化
-const { data } = await getLoginUser();
-const initialColorTheme = data.value?.colorTheme || 'BLUE_THEME';
-const initialShowScrollButton = data.value?.showScrollButton ?? false;
+const fetchRegisteredSites = async () => {
+  const { data, error } = await getLoginUser();
+  const user = data.value;
+  return user || {
+    colorTheme: "BLUE_THEME",
+    showScrollButton: false,
+  };
+};
 
 export const useSettingStore = defineStore({
   id: 'setting',
   state: (): SettingProps => ({
-    actTheme: initialColorTheme,
+    actTheme: "",
     format: 'list',
     maxSiteNum: 10,
     maxArticleLines: 5,
-    scrollButton: initialShowScrollButton,
+    scrollButton: false,
   }),
 
   getters: {},
   actions: {
+    async resetState() {
+      const user = await fetchRegisteredSites();
+      this.actTheme = user.colorTheme
+      this.scrollButton = user.showScrollButton
+    },
     SET_THEME(payload: string) {
       this.actTheme = payload;
     },

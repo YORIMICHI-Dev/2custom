@@ -1,14 +1,20 @@
 import { defineStore } from 'pinia';
 import type { CategorySelectSitesProps } from '@/types/stores/categorySelectSites';
 
-const { data, error } = await getCategorySelectSites();
-const initialSelectSites = data.value?.categorySelectSites || [];
+const fetchInitialSelectSites = async() => {
+  const { data, error } = await getCategorySelectSites();
+  return data.value?.categorySelectSites || [];
+}
 
 export const useCategorySelectSitesStore = defineStore({
   id: 'categorySelectSites',
   state: (): CategorySelectSitesProps => ({
-    categorySelectSites: initialSelectSites,
+    categorySelectSites: [],
   }),
   getters: {},
-  actions: {},
+  actions: {
+    async resetState() {
+      this.categorySelectSites = await fetchInitialSelectSites();
+    },
+  },
 });

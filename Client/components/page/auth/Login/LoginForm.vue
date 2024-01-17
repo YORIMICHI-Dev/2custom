@@ -17,14 +17,15 @@ const clickLogin = async() => {
   const valid = await validate()
   if (valid) {
     const {data, error} = await login({email: email.value as string, password: password.value as string})
-
     if (data.value) {
+      // jwt token設定
       const loginToken = useCookie<string|null>("token", {
-        sameSite: true,
+        sameSite: "lax",
         secure: true,
       })
       loginToken.value = data.value.token
-      router.push('/');
+
+      router.push('/')
     } else if (error.value) {
       console.log(error.value)
     }
