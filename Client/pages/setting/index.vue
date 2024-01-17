@@ -1,7 +1,7 @@
 <script setup lang="ts">
-// definePageMeta({
-//   middleware: ['home'],
-// });
+definePageMeta({
+  middleware: ['auth'],
+});
 
 const TITLE = 'ユーザー設定';
 useHead({
