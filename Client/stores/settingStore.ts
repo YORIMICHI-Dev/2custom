@@ -3,6 +3,7 @@ import type { SettingProps } from '@/types/stores/setting';
 
 const fetchRegisteredSites = async () => {
   const { data, error } = await getLoginUser();
+  if (error.value) console.log(error.value);
   const user = data.value;
   return (
     user || {

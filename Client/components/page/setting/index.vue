@@ -9,6 +9,11 @@ const clickSaveSetting = async () => {
     colorTheme: setting.actTheme,
     showScrollButton: setting.scrollButton,
   });
+  if (data.value) {
+    // anything
+  } else if (error.value) {
+    console.log(error.value);
+  }
   updating.value = false;
 };
 

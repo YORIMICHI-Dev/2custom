@@ -1,5 +1,9 @@
-import type { RegisteredSite } from '../api/useApiSites';
-
 export type RegisteredSitesProps = {
-  registeredSites: RegisteredSite[];
+  registeredSites: {
+    id: number;
+    name: string;
+    url: string;
+    category: string;
+    order: number;
+  }[];
 };

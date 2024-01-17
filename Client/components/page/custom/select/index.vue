@@ -13,6 +13,7 @@ const clickSaveSites = async () => {
   // Register API
   const { data, error } = await registerSites({ registerSites: selectedIdList });
   if (data.value) {
+    // anything
   } else if (error.value) {
     console.log(error.value);
   }

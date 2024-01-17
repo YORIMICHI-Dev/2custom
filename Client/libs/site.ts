@@ -1,12 +1,20 @@
-import type { CategorySelectSites, RegisteredSite } from '@/types/api/useApiSites';
-
 /**
- * カテゴリごとのサイトリストから、selectedが`true`のサイトのIDとorderを抽出
+ * カテゴリごとのサイトリストから、selectedが`true`のサイトのIDとそのリスト内の順序（order）を抽出します。
  *
- * @param {CategorySelectSites[]} categorySelectSites - カテゴリごとに分類されたサイトのリスト
- * @returns {{ siteId: number; order: number; }[]} 選択されたサイトのIDとorderの配列
+ * @param {Array} categorySelectSites - カテゴリごとに分類されたサイトのリスト。
+ * @returns {Array} 選択されたサイトのIDとそれらの順序を含むオブジェクトの配列。
  */
-export const getSelectedSites = (categorySelectSites: CategorySelectSites[]): { siteId: number; order: number }[] => {
+export const getSelectedSites = (
+  categorySelectSites: {
+    category: string;
+    selectSites: {
+      id: number;
+      name: string;
+      url: string;
+      selected: boolean;
+    }[];
+  }[]
+): { siteId: number; order: number }[] => {
   return categorySelectSites.flatMap((categorySite) =>
     categorySite.selectSites
       .filter((site) => site.selected)
@@ -18,12 +26,20 @@ export const getSelectedSites = (categorySelectSites: CategorySelectSites[]): { 
 };
 
 /**
- * カテゴリごとのサイトリストから、各サイトのIDと新しいorder値を含むオブジェクトを作成
+ * 与えられたサイトのリストに対して、各サイトに新しい順序（order）を割り当てます。
  *
- * @param {RegisteredSite[]} registerSites - カテゴリごとに分類されたサイトのリスト
- * @returns {{ siteId: number; order: number; }[]} 各サイトのIDとorderの配列
+ * @param {Array} registerSites - サイトのリスト。
+ * @returns {Array} 各サイトのIDと新しい順序を含むオブジェクトの配列。
  */
-export const setRegisterSitesOrder = (registerSites: RegisteredSite[]): { siteId: number; order: number }[] => {
+export const setRegisterSitesOrder = (
+  registerSites: {
+    id: number;
+    name: string;
+    url: string;
+    category: string;
+    order: number;
+  }[]
+): { siteId: number; order: number }[] => {
   return registerSites.map((site, index) => ({
     siteId: site.id,
     order: index + 1,

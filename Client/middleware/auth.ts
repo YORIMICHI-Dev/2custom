@@ -10,7 +10,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   const registeredSitesStore = useRegisteredSitesStore();
   const settingStore = useSettingStore();
 
-  if (categorySelectSitesStore.categorySelectSites.length == 0) await categorySelectSitesStore.resetState();
-  if (registeredSitesStore.registeredSites.length == 0) await registeredSitesStore.resetState();
-  if (settingStore.actTheme.trim() == '') await settingStore.resetState();
+  if (categorySelectSitesStore.categorySelectSites.length === 0) await categorySelectSitesStore.resetState();
+  if (registeredSitesStore.registeredSites.length === 0) await registeredSitesStore.resetState();
+  if (settingStore.actTheme.trim() === '') await settingStore.resetState();
 });

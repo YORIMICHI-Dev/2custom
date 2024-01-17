@@ -3,6 +3,7 @@ import type { RegisteredSitesProps } from '@/types/stores/registeredSites';
 
 const fetchRegisteredSites = async () => {
   const { data, error } = await getRegisteredSites();
+  if (error.value) console.log(error.value);
   return data.value?.registeredSites || [];
 };
 
