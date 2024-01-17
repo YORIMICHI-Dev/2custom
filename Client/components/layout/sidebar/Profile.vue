@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { LoginIcon, Logout2Icon } from 'vue-tabler-icons';
-const router = useRouter()
-const tokenCookie = useCookie<string|null>("token")
+const router = useRouter();
+const tokenCookie = useCookie<string | null>('token');
 
 const clickLogin = () => {
-  router.push("/auth/login")
-}
+  router.push('/auth/login');
+};
 
 const clickLogout = () => {
-  tokenCookie.value = null
-  router.push("/auth/login")
-}
+  tokenCookie.value = null;
+  router.push('/auth/login');
+};
 </script>
 
 <template>
@@ -22,15 +22,33 @@ const clickLogout = () => {
       </div>
 
       <!-- Login -->
-      <VAvatar v-if="!tokenCookie" variant="text" icon rounded="md" color="primary" width="20" class="cursor-pointer" @click="clickLogin">
+      <VAvatar
+        v-if="!tokenCookie"
+        variant="text"
+        icon
+        rounded="md"
+        color="primary"
+        width="20"
+        class="cursor-pointer"
+        @click="clickLogin"
+      >
         <LoginIcon width="20" />
         <VTooltip activator="parent" location="top">ログイン</VTooltip>
       </VAvatar>
 
       <!-- Logout -->
-      <VAvatar v-else variant="text" icon rounded="md" color="primary" width="20" class="cursor-pointer" @click="clickLogout">
-          <Logout2Icon width="20" />
-          <VTooltip activator="parent" location="top">ログアウト</VTooltip>
+      <VAvatar
+        v-else
+        variant="text"
+        icon
+        rounded="md"
+        color="primary"
+        width="20"
+        class="cursor-pointer"
+        @click="clickLogout"
+      >
+        <Logout2Icon width="20" />
+        <VTooltip activator="parent" location="top">ログアウト</VTooltip>
       </VAvatar>
     </div>
   </VSheet>

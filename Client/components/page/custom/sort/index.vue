@@ -1,5 +1,27 @@
 <script setup lang="ts">
+import { setRegisterSitesOrder } from '@/libs/site';
+const router = useRouter();
+const updating = ref(false);
 const registeredSitesStore = useRegisteredSitesStore();
+
+const clickSaveSites = async () => {
+  updating.value = true;
+  // 選択したサイトIDを抽出
+  const orderedRegisterSites = setRegisterSitesOrder(registeredSitesStore.registeredSites);
+  // Register API
+  const { data, error } = await registerSites({ registerSites: orderedRegisterSites });
+  if (data.value) {
+    // store更新
+    await registeredSitesStore.resetState();
+  } else if (error.value) {
+    console.log(error.value);
+  }
+  updating.value = false;
+};
+
+const clickCancelSetting = () => {
+  router.push('/');
+};
 </script>
 
 <template>
@@ -43,24 +65,22 @@ const registeredSitesStore = useRegisteredSitesStore();
           </div>
         </draggable>
       </SharedUIParentCard>
+
+      <!-- Submit -->
+      <div class="d-flex justify-end mt-5">
+        <VBtn
+          size="large"
+          :disabled="updating"
+          :loading="updating"
+          color="primary"
+          class="mr-4"
+          flat
+          @click="clickSaveSites"
+        >
+          Save
+        </VBtn>
+        <VBtn size="large" class="bg-lighterror text-error" flat @click="clickCancelSetting">Cancel</VBtn>
+      </div>
     </VCol>
   </VRow>
 </template>
-
-<style>
-th.w-20 {
-  width: 20%;
-}
-
-th.w-30 {
-  width: 30%;
-}
-
-th.w-40 {
-  width: 40%;
-}
-
-th.w-50 {
-  width: 50%;
-}
-</style>

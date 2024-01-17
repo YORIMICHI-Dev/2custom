@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Configuration.UserSecrets;
-
 namespace API.Models;
 
 public class UserSites

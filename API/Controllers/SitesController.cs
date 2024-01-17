@@ -97,9 +97,9 @@ public class SitesController : ControllerBase
     }
 
     [HttpPut("RegisterSites")]
-    public async Task<ActionResult> RegisterSites(RequestUserSitesDto requestUserSitesDto)
+    public async Task<ActionResult> RegisterSites(RequestRegisterSitesDto requestUserSitesDto)
     {
-        if (requestUserSitesDto.SiteIdList == null || !requestUserSitesDto.SiteIdList.Any()) return BadRequest(new ProblemDetails { Title = "Site list is empty." });
+        if (requestUserSitesDto.RegisterSites == null || !requestUserSitesDto.RegisterSites.Any()) return BadRequest(new ProblemDetails { Title = "Site list is empty." });
 
         Users user = await _dataContext.Users.Where(user => user.Id == int.Parse(User.FindFirst("userId").Value)).FirstOrDefaultAsync();
         if (user == null) return NotFound(new ProblemDetails { Title = "User is not found." });
@@ -108,9 +108,9 @@ public class SitesController : ControllerBase
         var existingUserSites = _dataContext.UserSites.Where(userSite => userSite.UserId == user.Id);
         _dataContext.UserSites.RemoveRange(existingUserSites);
 
-        foreach (var siteId in requestUserSitesDto.SiteIdList)
+        foreach (var site in requestUserSitesDto.RegisterSites)
         {
-            _dataContext.UserSites.Add(new UserSites { UserId = user.Id, SiteId = siteId, Order = 1, });
+            _dataContext.UserSites.Add(new UserSites { UserId = user.Id, SiteId = site.SiteId, Order = site.Order });
         }
 
         // データベースを更新

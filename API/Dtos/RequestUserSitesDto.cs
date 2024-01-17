@@ -1,6 +1,13 @@
 namespace API.Dtos;
 
-public class RequestUserSitesDto
+public class RegisterSiteDto
 {
-    public IEnumerable<int> SiteIdList { get; set; }
+    public int SiteId { get; set; }
+    public int Order { get; set; }
+}
+
+// RequestUserSitesDto クラスの定義
+public class RequestRegisterSitesDto
+{
+    public IEnumerable<RegisterSiteDto> RegisterSites { get; set; }
 }

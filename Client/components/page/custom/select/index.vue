@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { getSelectedSiteIdList } from '@/libs/site';
+import { getSelectedSites } from '@/libs/site';
 const router = useRouter();
 const updating = ref(false);
 const selectSitesStore = useCategorySelectSitesStore();
 
 const clickSaveSites = async () => {
-  updating.value = true
+  updating.value = true;
 
-  // 選択したサイトIDを抽出
-  const selectedIdList = getSelectedSiteIdList(selectSitesStore.categorySelectSites)
+  // 選択したサイトIDとorderを抽出
+  const selectedIdList = getSelectedSites(selectSitesStore.categorySelectSites);
 
   // Register API
-  const {data, error} = await registerSites({siteIdList: selectedIdList})
-  if (data.value){
-  } else if(error.value) {
-    console.log(error.value)
+  const { data, error } = await registerSites({ registerSites: selectedIdList });
+  if (data.value) {
+  } else if (error.value) {
+    console.log(error.value);
   }
-  updating.value = false
+  updating.value = false;
 };
 
 const clickCancelSetting = () => {
@@ -32,7 +32,15 @@ const clickCancelSetting = () => {
 
         <!-- Submit -->
         <div class="d-flex justify-end mt-5">
-          <VBtn size="large" :disabled="updating" :loading="updating" color="primary" class="mr-4" flat @click="clickSaveSites">
+          <VBtn
+            size="large"
+            :disabled="updating"
+            :loading="updating"
+            color="primary"
+            class="mr-4"
+            flat
+            @click="clickSaveSites"
+          >
             Save
           </VBtn>
           <VBtn size="large" class="bg-lighterror text-error" flat @click="clickCancelSetting">Cancel</VBtn>

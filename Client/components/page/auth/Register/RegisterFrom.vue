@@ -1,34 +1,39 @@
 <script setup lang="ts">
-import * as yup from "yup"
+import * as yup from 'yup';
 const router = useRouter();
 
 // email, password validation
 const schema = yup.object({
-  email: yup.string().required().email("有効なメールアドレスを入力してください"),
-  password: yup.string().required().min(5, "パスワードは5文字以上入力してください"),
-  passwordConfirm: yup.string()
+  email: yup.string().required().email('有効なメールアドレスを入力してください'),
+  password: yup.string().required().min(5, 'パスワードは5文字以上入力してください'),
+  passwordConfirm: yup
+    .string()
     .required()
-    .oneOf([yup.ref('password')], "パスワードが一致しません"),
-})
-const { errors, validate } = useForm({ validationSchema: schema})
-const { value: email } = useField("email")
-const { value: password } = useField("password")
-const { value: passwordConfirm } = useField("passwordConfirm")
+    .oneOf([yup.ref('password')], 'パスワードが一致しません'),
+});
+const { errors, validate } = useForm({ validationSchema: schema });
+const { value: email } = useField('email');
+const { value: password } = useField('password');
+const { value: passwordConfirm } = useField('passwordConfirm');
 
 // Register API
-const clickRegister = async() => {
-  const valid = await validate()
+const clickRegister = async () => {
+  const valid = await validate();
   if (valid) {
-    const {data, error} = await register({email: email.value as string, password: password.value as string, passwordConfirm: passwordConfirm.value as string})
+    const { data, error } = await register({
+      email: email.value as string,
+      password: password.value as string,
+      passwordConfirm: passwordConfirm.value as string,
+    });
     if (data.value) {
-        const loginToken = useCookie<string|null>("token")
-        loginToken.value = data.value.token
-        router.push('/custom/select');
-      }
-    else if (error.value) {
-      console.log(error.value)
+      const loginToken = useCookie<string | null>('token');
+      loginToken.value = data.value.token;
+      router.push('/custom/select');
+    } else if (error.value) {
+      console.log(error.value);
     }
-}}
+  }
+};
 </script>
 
 <template>
@@ -47,12 +52,7 @@ const clickRegister = async() => {
 
     <!-- パスワード確認 -->
     <VLabel class="text-subtitle-1 font-weight-semibold pb-2 text-lightText">パスワード確認</VLabel>
-    <VTextField
-      v-model="passwordConfirm"
-      required
-      hide-details="auto"
-      type="password"
-    />
+    <VTextField v-model="passwordConfirm" required hide-details="auto" type="password" />
     <p class="text-error text-13 ml-5 mb-5">{{ errors.passwordConfirm }}</p>
 
     <!-- ログインボタン -->

@@ -1,36 +1,34 @@
 <script setup lang="ts">
-import * as yup from "yup"
+import * as yup from 'yup';
 const router = useRouter();
 
 // email, password validation
 const schema = yup.object({
-  email: yup.string().required().email("有効なメールアドレスを入力してください"),
-  password: yup.string().required().min(5, "パスワードは5文字以上入力してください"),
-  }
-)
-const { errors, validate } = useForm({ validationSchema: schema})
-const { value: email } = useField("email")
-const { value: password } = useField("password")
+  email: yup.string().required().email('有効なメールアドレスを入力してください'),
+  password: yup.string().required().min(5, 'パスワードは5文字以上入力してください'),
+});
+const { errors, validate } = useForm({ validationSchema: schema });
+const { value: email } = useField('email');
+const { value: password } = useField('password');
 
 // login API
-const clickLogin = async() => {
-  const valid = await validate()
+const clickLogin = async () => {
+  const valid = await validate();
   if (valid) {
-    const {data, error} = await login({email: email.value as string, password: password.value as string})
+    const { data, error } = await login({ email: email.value as string, password: password.value as string });
     if (data.value) {
       // jwt token設定
-      const loginToken = useCookie<string|null>("token", {
-        sameSite: "lax",
+      const loginToken = useCookie<string | null>('token', {
+        sameSite: 'lax',
         secure: true,
-      })
-      loginToken.value = data.value.token
+      });
+      loginToken.value = data.value.token;
 
-      router.push('/')
+      router.push('/');
     } else if (error.value) {
-      console.log(error.value)
+      console.log(error.value);
     }
-}
-
+  }
 };
 </script>
 
@@ -45,13 +43,7 @@ const clickLogin = async() => {
 
     <!-- パスワード -->
     <VLabel class="text-subtitle-1 font-weight-semibold mb-2 text-lightText">パスワード</VLabel>
-    <VTextField
-      v-model="password"
-      required
-      hide-details="auto"
-      type="password"
-      class="pwdInput"
-    />
+    <VTextField v-model="password" required hide-details="auto" type="password" class="pwdInput" />
     <p class="text-error text-13 ml-5">{{ errors.password }}</p>
 
     <!-- パスワード忘れ -->

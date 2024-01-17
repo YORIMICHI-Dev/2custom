@@ -35,6 +35,9 @@ export const getRegisteredSites = async () => {
     baseURL: runtimeConfig.public.apiUrl,
     transform: (data: any): GetRegisteredSitesResponse => {
       const fetchSites = data;
+      if (fetchSites) {
+        data.registeredSites.sort((a: any, b: any) => a.order - b.order);
+      }
       return fetchSites;
     },
   });
