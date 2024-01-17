@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { LoginIcon, Logout2Icon } from 'vue-tabler-icons';
+import { logoutToast } from '~/theme/toast';
 const router = useRouter();
+const toast = useToast();
 const tokenCookie = useCookie<string | null>('token');
 
 const clickLogin = () => {
@@ -9,6 +11,7 @@ const clickLogin = () => {
 
 const clickLogout = () => {
   tokenCookie.value = null;
+  toast.add(logoutToast);
   router.push('/auth/login');
 };
 </script>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import * as yup from 'yup';
+import { successFormToast } from '~/theme/toast';
 const router = useRouter();
 const toast = useToast();
 const submitting = ref<boolean>(false);
@@ -17,7 +18,7 @@ const { value: detail } = useField('detail');
 
 const clickSubmit = async () => {
   submitting.value = true;
-  const {valid} = await validate();
+  const { valid } = await validate();
 
   if (valid) {
     // const { data, error } = await login({ email: email.value as string, content: content.value as string, detail: detail.value as string });
@@ -26,7 +27,7 @@ const clickSubmit = async () => {
     // } else if (error.value) {
     //   console.log(error.value);
     // }
-    toast.add({ title: 'お問い合わせを送信しました', timeout: 3000});
+    toast.add(successFormToast);
   }
   submitting.value = false;
 };
@@ -76,7 +77,7 @@ const formContents = [
 
           <!-- Content -->
           <VLabel class="mb-2 font-weight-medium">お問い合わせ項目</VLabel>
-          <VSelect v-model="(content as string)" :items="formContents" label="Content">
+          <VSelect v-model="content as string" :items="formContents" label="Content">
             <template v-slot:prepend-inner>
               <Message2Icon stroke-width="1.5" size="22" class="text-medium-emphasis" />
             </template>

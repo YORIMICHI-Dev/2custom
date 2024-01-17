@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import * as yup from 'yup';
+import { successLoginToast } from '~/theme/toast';
 const router = useRouter();
 const toast = useToast();
 
 // email, password validation
 const schema = yup.object({
-  email: yup.string().required().email('有効なメールアドレスを入力してください'),
-  password: yup.string().required().min(5, 'パスワードは5文字以上入力してください'),
+  email: yup.string().required('メールアドレスを入力してください').email('有効なメールアドレスを入力してください'),
+  password: yup.string().required('パスワードを入力してください').min(5, 'パスワードは5文字以上入力してください'),
   passwordConfirm: yup
     .string()
-    .required()
+    .required('確認のため再度パスワードを入力してください')
     .oneOf([yup.ref('password')], 'パスワードが一致しません'),
 });
 const { errors, validate } = useForm({ validationSchema: schema });
@@ -19,7 +20,7 @@ const { value: passwordConfirm } = useField('passwordConfirm');
 
 // Register API
 const clickRegister = async () => {
-  const {valid} = await validate();
+  const { valid } = await validate();
   if (valid) {
     const { data, error } = await register({
       email: email.value as string,
@@ -30,7 +31,7 @@ const clickRegister = async () => {
       const loginToken = useCookie<string | null>('token');
       loginToken.value = data.value.token;
 
-      toast.add({title: "ログインしました", timeout: 3000})
+      toast.add(successLoginToast);
       router.push('/custom/select');
     } else if (error.value) {
       console.log(error.value);

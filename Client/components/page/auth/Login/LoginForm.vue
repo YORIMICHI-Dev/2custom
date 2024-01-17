@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import * as yup from 'yup';
+import { successLoginToast } from '~/theme/toast';
 const router = useRouter();
-const toast = useToast()
+const toast = useToast();
 
 // email, password validation
 const schema = yup.object({
-  email: yup.string().required().email('有効なメールアドレスを入力してください'),
-  password: yup.string().required().min(5, 'パスワードは5文字以上入力してください'),
+  email: yup.string().required('メールアドレスを入力してください').email('有効なメールアドレスを入力してください'),
+  password: yup.string().required('パスワードを入力してください').min(5, 'パスワードは5文字以上入力してください'),
 });
 const { errors, validate } = useForm({ validationSchema: schema });
 const { value: email } = useField('email');
@@ -14,7 +15,7 @@ const { value: password } = useField('password');
 
 // login API
 const clickLogin = async () => {
-  const {valid} = await validate();
+  const { valid } = await validate();
   if (valid) {
     const { data, error } = await login({ email: email.value as string, password: password.value as string });
     if (data.value) {
@@ -25,7 +26,7 @@ const clickLogin = async () => {
       });
       loginToken.value = data.value.token;
 
-      toast.add({title: "ログインしました", timeout: 3000})
+      toast.add(successLoginToast);
       router.push('/');
     } else if (error.value) {
       console.log(error.value);

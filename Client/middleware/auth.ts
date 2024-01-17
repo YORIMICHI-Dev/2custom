@@ -1,10 +1,13 @@
-export default defineNuxtRouteMiddleware(async (to, from) => {
-  // ルートパスへのアクセスを除外
-  if (to.path === '/') return;
+import { loginToast } from '@/theme/toast';
 
+export default defineNuxtRouteMiddleware(async (to, from) => {
   // Cookieからトークンを読み込む
   const tokenCookie = useCookie<string | null>('token');
-  if (!tokenCookie.value) return navigateTo('/auth/login');
+  if (to.path !== '/' && !tokenCookie.value) {
+    const toast = useToast();
+    toast.add(loginToast);
+    return navigateTo('/auth/login');
+  }
 
   const categorySelectSitesStore = useCategorySelectSitesStore();
   const registeredSitesStore = useRegisteredSitesStore();
