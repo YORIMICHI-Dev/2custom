@@ -8,6 +8,7 @@ export type CategorySelectSites = {
 };
 
 export type SelectSite = {
+  id: number
   name: string;
   url: string;
   selected: boolean;

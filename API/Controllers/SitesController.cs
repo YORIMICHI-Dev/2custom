@@ -45,6 +45,7 @@ public class SitesController : ControllerBase
 
             var selectSiteDtos = filteredSites.Select(site => new SelectSiteDto
             {
+                Id = site.Id,
                 Name = site.Name,
                 Url = site.Url,
                 Selected = registeredSiteIdList.Contains(site.Id)
