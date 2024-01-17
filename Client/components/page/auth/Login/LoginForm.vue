@@ -1,41 +1,54 @@
 <script setup lang="ts">
+import * as yup from "yup"
 const router = useRouter();
 
 // email, password validation
-const email = ref('');
-const password = ref('');
-const emailRules = ref([
-  (v: string) => !!v || 'E-mail is required',
-  (v: string) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-]);
-const passwordRules = ref([
-  (v: string) => !!v || 'Password is required',
-  (v: string) => (v && v.length <= 10) || 'Password must be less than 10 characters',
-]);
+const schema = yup.object({
+  email: yup.string().required().email("有効なメールアドレスを入力してください"),
+  password: yup.string().required().min(5, "パスワードは5文字以上入力してください"),
+  }
+)
+const { errors, validate } = useForm({ validationSchema: schema})
+const { value: email } = useField("email")
+const { value: password } = useField("password")
 
-const submitLogin = () => {
-  router.push('/');
+// login API
+const clickLogin = async() => {
+  const valid = await validate()
+  if (valid) {
+    const {data, error} = await login({email: email.value as string, password: password.value as string})
+
+    if (data.value) {
+      const loginToken = useCookie<string|null>("token")
+      loginToken.value = data.value.token
+      router.push('/');
+    } else if (error.value) {
+      console.log(error.value)
+    }
+}
+
 };
 </script>
 
 <template>
   <!-- Logo -->
   <div class="d-flex justify-center py-4 mb-5"><Logo /></div>
-  <form @submit="submitLogin" class="mt-5">
+  <div class="mt-5">
     <!-- メールアドレス -->
-    <VLabel class="text-subtitle-1 font-weight-semibold pb-2 text-lightText">メールアドレス</VLabel>
-    <VTextField v-model="email" :rules="emailRules" class="mb-8" required hide-details="auto" />
+    <VLabel class="text-subtitle-1 font-weight-semibold mb-2 text-lightText">メールアドレス</VLabel>
+    <VTextField v-model="email" required hide-details="auto" />
+    <p class="text-error text-13 ml-5 mb-5">{{ errors.email }}</p>
 
     <!-- パスワード -->
-    <VLabel class="text-subtitle-1 font-weight-semibold pb-2 text-lightText">パスワード</VLabel>
+    <VLabel class="text-subtitle-1 font-weight-semibold mb-2 text-lightText">パスワード</VLabel>
     <VTextField
       v-model="password"
-      :rules="passwordRules"
       required
       hide-details="auto"
       type="password"
       class="pwdInput"
     />
+    <p class="text-error text-13 ml-5">{{ errors.password }}</p>
 
     <!-- パスワード忘れ -->
     <div class="d-flex flex-wrap align-center my-5">
@@ -47,8 +60,10 @@ const submitLogin = () => {
     </div>
 
     <!-- ログインボタン -->
-    <VBtn size="large" color="primary" :disabled="!email || !password" block type="submit" flat>ログイン</VBtn>
-  </form>
+    <form @submit.prevent="clickLogin">
+      <VBtn size="large" color="primary" :disabled="!email || !password" block type="submit" flat>ログイン</VBtn>
+    </form>
+  </div>
 
   <!-- アカウント作成 -->
   <h6 class="text-h6 text-medium-emphasis d-flex justify-center align-center mt-5">

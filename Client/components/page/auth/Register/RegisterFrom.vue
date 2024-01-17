@@ -1,50 +1,65 @@
 <script setup lang="ts">
+import * as yup from "yup"
 const router = useRouter();
 
 // email, password validation
-const email = ref('');
-const password = ref('');
-const passwordConfirm = ref('');
-const emailRules = ref([
-  (v: string) => !!v || 'メールアドレスを入力してください',
-  (v: string) => /.+@.+\..+/.test(v) || '無効なメールアドレスです',
-]);
-const passwordRules = ref([(v: string) => !!v || 'パスワードを入力してください']);
-const passwordConfirmRules = ref([(v: string) => v == password.value || 'パスワードが一致しません']);
+const schema = yup.object({
+  email: yup.string().required().email("有効なメールアドレスを入力してください"),
+  password: yup.string().required().min(5, "パスワードは5文字以上入力してください"),
+  passwordConfirm: yup.string()
+    .required()
+    .oneOf([yup.ref('password')], "パスワードが一致しません"),
+})
+const { errors, validate } = useForm({ validationSchema: schema})
+const { value: email } = useField("email")
+const { value: password } = useField("password")
+const { value: passwordConfirm } = useField("passwordConfirm")
 
-const submitLogin = () => {
-  router.push('/');
-};
+// Register API
+const clickRegister = async() => {
+  const valid = await validate()
+  if (valid) {
+    const {data, error} = await register({email: email.value as string, password: password.value as string, passwordConfirm: passwordConfirm.value as string})
+    if (data.value) {
+        const loginToken = useCookie<string|null>("token")
+        loginToken.value = data.value.token
+        router.push('/custom/select');
+      }
+    else if (error.value) {
+      console.log(error.value)
+    }
+}}
 </script>
 
 <template>
   <!-- Logo -->
   <div class="d-flex justify-center py-4 mb-5"><Logo /></div>
-  <form @submit="submitLogin" class="mt-5">
+  <div class="mt-5">
     <!-- メールアドレス -->
-    <VLabel class="text-subtitle-1 font-weight-semibold pb-2 text-lightText">メールアドレス</VLabel>
-    <VTextField v-model="email" :rules="emailRules" class="mb-8" required hide-details="auto" />
+    <VLabel class="text-subtitle-1 font-weight-semibold mb-2 text-lightText">メールアドレス</VLabel>
+    <VTextField v-model="email" required hide-details="auto" />
+    <p class="text-error text-13 ml-5 mb-5">{{ errors.email }}</p>
 
     <!-- パスワード -->
     <VLabel class="text-subtitle-1 font-weight-semibold pb-2 text-lightText">パスワード</VLabel>
-    <VTextField v-model="password" :rules="passwordRules" required hide-details="auto" type="password" class="mb-8" />
+    <VTextField v-model="password" required hide-details="auto" type="password" />
+    <p class="text-error text-13 ml-5 mb-5">{{ errors.password }}</p>
 
     <!-- パスワード確認 -->
     <VLabel class="text-subtitle-1 font-weight-semibold pb-2 text-lightText">パスワード確認</VLabel>
     <VTextField
       v-model="passwordConfirm"
-      :rules="passwordConfirmRules"
       required
       hide-details="auto"
       type="password"
-      class="mb-8"
     />
+    <p class="text-error text-13 ml-5 mb-5">{{ errors.passwordConfirm }}</p>
 
     <!-- ログインボタン -->
-    <VBtn class="mt-10" size="large" color="primary" :disabled="!email || !password" block type="submit" flat
-      >登録</VBtn
-    >
-  </form>
+    <form @submit.prevent="clickRegister">
+      <VBtn size="large" color="primary" :disabled="!email || !password" block type="submit" flat>登録</VBtn>
+    </form>
+  </div>
 
   <!-- アカウント作成 -->
   <h6 class="text-h6 text-medium-emphasis d-flex justify-center align-center mt-5">

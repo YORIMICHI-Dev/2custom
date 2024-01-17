@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authorization;
 using API.Helpers;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace API.Controllers;
 
@@ -53,7 +54,7 @@ public class AuthController : ControllerBase
         _dataContext.Users.Add(registerUser);
 
         int result = await _dataContext.SaveChangesAsync();
-        if (result > 0) return CreatedAtAction(nameof(Register), new { id = registerUser.Id }, registerUser.Email);
+        if (result > 0) return Ok(new { Token = _authHelper.CreateJwtToken(registerUser.Id, registerUser.Role) });
 
         return BadRequest(new ProblemDetails { Title = "Failed to register user." });
     }

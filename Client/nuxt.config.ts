@@ -15,6 +15,8 @@ export default defineNuxtConfig({
   modules: [
     // pinia
     '@pinia/nuxt',
+    // vee-validate
+    '@vee-validate/nuxt',
     // vuetify setting
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
