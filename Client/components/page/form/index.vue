@@ -1,9 +1,36 @@
 <script setup lang="ts">
+import * as yup from 'yup';
 const router = useRouter();
-const submitState = ref(false);
-const clickSubmit = () => {
-  submitState.value = !submitState.value;
+const toast = useToast();
+const submitting = ref<boolean>(false);
+
+// email, password validation
+const schema = yup.object({
+  email: yup.string().required('メールアドレスを入力してください').email('有効なメールアドレスを入力してください'),
+  content: yup.string().required('お問い合わせ項目を選択してください'),
+  detail: yup.string().required('お問い合わせ内容を入力してください').min(1, 'お問い合わせ内容を入力してください'),
+});
+const { errors, validate } = useForm({ validationSchema: schema });
+const { value: email } = useField('email');
+const { value: content } = useField('content');
+const { value: detail } = useField('detail');
+
+const clickSubmit = async () => {
+  submitting.value = true;
+  const {valid} = await validate();
+
+  if (valid) {
+    // const { data, error } = await login({ email: email.value as string, content: content.value as string, detail: detail.value as string });
+    // if (data.value) {
+    //   // anything
+    // } else if (error.value) {
+    //   console.log(error.value);
+    // }
+    toast.add({ title: 'お問い合わせを送信しました', timeout: 3000});
+  }
+  submitting.value = false;
 };
+
 const clickCancelSetting = () => {
   router.push('/');
 };
@@ -40,31 +67,42 @@ const formContents = [
 
           <!-- Email -->
           <VLabel class="mb-2 font-weight-medium">メールアドレス</VLabel>
-          <VTextField variant="outlined" type="email" placeholder="Email" color="primary">
+          <VTextField v-model="email" variant="outlined" type="email" placeholder="Email" color="primary">
             <template v-slot:prepend-inner>
               <MailIcon stroke-width="1.5" size="22" class="text-medium-emphasis" />
             </template>
           </VTextField>
+          <p class="text-error text-13 ml-5 mb-5">{{ errors.email }}</p>
 
           <!-- Content -->
           <VLabel class="mb-2 font-weight-medium">お問い合わせ項目</VLabel>
-          <v-select :items="formContents" label="Content">
+          <VSelect v-model="(content as string)" :items="formContents" label="Content">
             <template v-slot:prepend-inner>
               <Message2Icon stroke-width="1.5" size="22" class="text-medium-emphasis" />
             </template>
-          </v-select>
+          </VSelect>
+          <p class="text-error text-13 ml-5 mb-5">{{ errors.content }}</p>
 
           <!-- Detail -->
           <VLabel class="mb-2 font-weight-medium">お問い合わせ詳細</VLabel>
-          <VTextarea variant="outlined" type="email" placeholder="..." color="primary"> </VTextarea>
+          <VTextarea v-model="detail" variant="outlined" type="email" placeholder="..." color="primary"> </VTextarea>
+          <p class="text-error text-13 ml-5 mb-5">{{ errors.detail }}</p>
         </VCardItem>
       </VCard>
-    </VCol>
 
-    <!-- Submit -->
-    <VCol cols="12" md="9">
+      <!-- Submit -->
       <div class="d-flex justify-end mt-5">
-        <VBtn size="large" color="primary" class="mr-4" flat @click="clickSubmit">Send</VBtn>
+        <VBtn
+          size="large"
+          color="primary"
+          class="mr-4"
+          flat
+          :disabled="submitting"
+          :loading="submitting"
+          @click="clickSubmit"
+          >Send</VBtn
+        >
+        <!-- Cancel Button -->
         <VBtn size="large" class="bg-lighterror text-error" flat @click="clickCancelSetting">Cancel</VBtn>
       </div>
     </VCol>

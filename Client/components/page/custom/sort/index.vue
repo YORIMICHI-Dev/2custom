@@ -22,6 +22,13 @@ const clickSaveSites = async () => {
 const clickCancelSetting = () => {
   router.push('/');
 };
+
+const clickDeleteSite = (siteId: number) => {
+  if (registeredSitesStore.registeredSites.length === 0) return;
+  registeredSitesStore.registeredSites = registeredSitesStore.registeredSites.filter((site) => {
+    return site.id !== siteId;
+  });
+};
 </script>
 
 <template>
@@ -55,7 +62,7 @@ const clickCancelSetting = () => {
                 </VChip>
               </VCol>
               <VCol md="2" sm="2">
-                <VBtn size="30" icon variant="flat" class="mr-2 bg-error">
+                <VBtn size="30" icon variant="flat" class="mr-2 bg-error" @click="clickDeleteSite(registerSite.id)">
                   <VTooltip activator="parent" location="top">削除</VTooltip>
                   <TrashIcon size="18" class="" />
                 </VBtn>

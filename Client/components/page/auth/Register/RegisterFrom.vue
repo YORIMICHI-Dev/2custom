@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as yup from 'yup';
 const router = useRouter();
+const toast = useToast();
 
 // email, password validation
 const schema = yup.object({
@@ -18,7 +19,7 @@ const { value: passwordConfirm } = useField('passwordConfirm');
 
 // Register API
 const clickRegister = async () => {
-  const valid = await validate();
+  const {valid} = await validate();
   if (valid) {
     const { data, error } = await register({
       email: email.value as string,
@@ -28,6 +29,8 @@ const clickRegister = async () => {
     if (data.value) {
       const loginToken = useCookie<string | null>('token');
       loginToken.value = data.value.token;
+
+      toast.add({title: "ログインしました", timeout: 3000})
       router.push('/custom/select');
     } else if (error.value) {
       console.log(error.value);

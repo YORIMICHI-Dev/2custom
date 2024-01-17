@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as yup from 'yup';
 const router = useRouter();
+const toast = useToast()
 
 // email, password validation
 const schema = yup.object({
@@ -13,7 +14,7 @@ const { value: password } = useField('password');
 
 // login API
 const clickLogin = async () => {
-  const valid = await validate();
+  const {valid} = await validate();
   if (valid) {
     const { data, error } = await login({ email: email.value as string, password: password.value as string });
     if (data.value) {
@@ -24,6 +25,7 @@ const clickLogin = async () => {
       });
       loginToken.value = data.value.token;
 
+      toast.add({title: "ログインしました", timeout: 3000})
       router.push('/');
     } else if (error.value) {
       console.log(error.value);
