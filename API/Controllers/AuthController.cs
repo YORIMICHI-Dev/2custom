@@ -34,7 +34,7 @@ public class AuthController : ControllerBase
 
         // すでにEmailが登録されているか確認
         Users user = await _dataContext.Users.FirstOrDefaultAsync(user => user.Email == requestUserDto.Email);
-        if (user != null) return BadRequest(new ProblemDetails { Title = "Email was already registered." });
+        if (user != null) return Conflict(new ProblemDetails { Title = "Email was already registered." });
 
         // パスワードをハッシュ化し登録
         byte[] passwordSalt = new byte[128 / 8];
