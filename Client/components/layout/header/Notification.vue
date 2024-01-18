@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const notifications = ['test', 'test', 'test', 'test', 'test'];
+const notifications = ['お知らせはありません'];
 </script>
 <template>
   <!-- ---------------------------------------------- -->
@@ -20,7 +20,7 @@ const notifications = ['test', 'test', 'test', 'test', 'test'];
           <!-- <v-chip color="primary" variant="flat" size="small" class="text-white">5 New</v-chip> -->
         </div>
       </div>
-      <perfect-scrollbar style="height: 300px">
+      <perfect-scrollbar style="height: 200px">
         <VList class="py-0 theme-list" lines="two">
           <VListItem v-for="item in notifications" :key="item" :value="item" color="primary" class="py-4 px-8">
             <VListItemTitle>{{ item }}</VListItemTitle>
