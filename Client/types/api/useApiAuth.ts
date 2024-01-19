@@ -16,3 +16,7 @@ export type LoginRequestBody = {
 export type LoginResponse = {
   token: string;
 };
+
+export type refreshTokenResponse = {
+  token: string;
+};
