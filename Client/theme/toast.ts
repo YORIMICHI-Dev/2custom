@@ -50,7 +50,7 @@ export const successLoginToast = {
 };
 
 export const successFormToast = {
-  id: 'success_login',
+  id: 'success_form',
   title: 'お問い合わせを送信しました',
   timeout: 2000,
   icon: 'i-heroicons-check-circle',
@@ -61,6 +61,22 @@ export const successFormToast = {
     },
     icon: {
       color: 'success',
+    },
+  },
+};
+
+export const errorFormToast = {
+  id: 'error_form',
+  title: 'お問い合わせの送信に失敗しました',
+  timeout: 2000,
+  icon: 'i-heroicons-check-circle',
+  ui: {
+    progress: {
+      base: 'absolute bottom-0 end-0 start-0 h-1',
+      background: 'bg-error',
+    },
+    icon: {
+      color: 'error',
     },
   },
 };
